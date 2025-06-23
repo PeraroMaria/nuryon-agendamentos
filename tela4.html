@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escolha o Profissional - Nuryon</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f7f9fc;
+      color: #0c1f4a;
+    }
+    .professional-card {
+      border-radius: 12px;
+      background-color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .professional-card:hover {
+      transform: translateY(-5px);
+      background-color: #e8f0ff;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+    }
+    .professional-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    .professional-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .professional-desc {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .btn-next {
+      background-color: #0c1f4a;
+      color: white;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+    }
+    .btn-next:hover {
+      background-color: #0a193a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold" id="tituloPagina">Escolha o profissional</h2>
+      <p class="text-muted">Selecione o profissional desejado para o atendimento</p>
+    </div>
+
+    <div class="row g-4" id="profissionaisContainer">
+      <!-- Profissionais serão inseridos dinamicamente -->
+    </div>
+
+    <div class="text-center mt-5">
+      <button class="btn-next" disabled id="nextButton" onclick="window.location.href='tela5.html'">Avançar</button>
+    </div>
+  </div>
+
+  <script>
+    const profissionaisPorServico = {
+      'Limpeza de Pele': [
+        { nome: 'Juliana', foto: 'img/juliana.jpg', descricao: 'Esteticista' },
+        { nome: 'Amanda', foto: 'img/amanda.jpg', descricao: 'Especialista em pele' }
+      ],
+      'Massagem Relaxante': [
+        { nome: 'Amanda', foto: 'img/amanda.jpg', descricao: 'Massoterapeuta' },
+        { nome: 'Paula', foto: 'img/paula.jpg', descricao: 'Fisioterapeuta' }
+      ],
+      'Botox': [
+        { nome: 'Amanda', foto: 'img/amanda.jpg', descricao: 'Especialista em botox' }
+      ],
+      'Corte Masculino': [
+        { nome: 'Lucas', foto: 'img/lucas.jpg', descricao: 'Especialista em cortes masculinos' }
+      ],
+      'Corte + Barba + Sobrancelha': [
+        { nome: 'Lucas', foto: 'img/lucas.jpg', descricao: 'Corte completo e estilo' },
+        { nome: 'Rafael', foto: 'img/rafael.jpg', descricao: 'Barbeiro sênior' }
+      ],
+      'Barba e Bigode': [
+        { nome: 'Rafael', foto: 'img/rafael.jpg', descricao: 'Barbeiro sênior' }
+      ]
+    };
+
+    const servico = localStorage.getItem('servicoSelecionado');
+    document.getElementById('tituloPagina').innerText = `Profissionais para ${servico}`;
+
+    const container = document.getElementById('profissionaisContainer');
+    const lista = profissionaisPorServico[servico] || [];
+
+    lista.forEach(p => {
+      const col = document.createElement('div');
+      col.className = 'col-md-4 d-flex';
+
+      const card = document.createElement('div');
+      card.className = 'professional-card w-100';
+      card.innerHTML = `
+        <img src="${p.foto}" alt="${p.nome}">
+        <div class="professional-name">${p.nome}</div>
+        <div class="professional-desc">${p.descricao}</div>
+      `;
+      card.onclick = () => selecionar(card, p.nome);
+
+      col.appendChild(card);
+      container.appendChild(col);
+    });
+
+    // Adiciona opção "Não tenho preferência"
+    const col = document.createElement('div');
+    col.className = 'col-md-4 d-flex';
+    const card = document.createElement('div');
+    card.className = 'professional-card w-100';
+    card.innerHTML = `
+      <img src="img/sem-preferencia.png" alt="Sem preferência">
+      <div class="professional-name">Não tenho preferência</div>
+      <div class="professional-desc">Qualquer profissional disponível</div>
+    `;
+    card.onclick = () => selecionar(card, 'Sem preferência');
+    col.appendChild(card);
+    container.appendChild(col);
+
+    function selecionar(el, nomeProfissional) {
+      document.querySelectorAll('.professional-card').forEach(card => {
+        card.style.border = 'none';
+        card.style.fontWeight = 'normal';
+      });
+      el.style.border = '2px solid #0c1f4a';
+      el.style.fontWeight = '600';
+      document.getElementById('nextButton').disabled = false;
+      localStorage.setItem('profissionalSelecionado', nomeProfissional);
+    }
+  </script>
+</body>
+</html>
