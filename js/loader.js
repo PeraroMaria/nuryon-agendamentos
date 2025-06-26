@@ -74,11 +74,14 @@
 
     // Serviços rápidos (até 4)
     const ulServ = document.getElementById("lista-servicos");
+    if (ulServ) {
     (d.servicos || []).slice(0, 4).forEach(s => {
-      const li = document.createElement("li");
-      li.innerText = `• ${s.nome}`;
-      ulServ.appendChild(li);
+        const li = document.createElement("li");
+        li.innerText = `• ${s.nome}`;
+        ulServ.appendChild(li);
     });
+    }
+
 
     // Guarda JSON inteiro em localStorage para as próximas telas
     localStorage.setItem("jsonEmpresa", JSON.stringify(d));
