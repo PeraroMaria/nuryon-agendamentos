@@ -1,0 +1,17 @@
+{
+  "nome": "Barbearia Estilo Fino",
+  "descricao": "Especialistas em cortes masculinos.",
+  "logo": "barbearia.png",
+  "tema": "#0c1f4a",
+  "whatsapp": "5511999999999",
+
+  "servicos": [
+    { "categoria": "Cabelos", "nome": "Corte masculino", "preco": 40 },
+    { "categoria": "Barba", "nome": "Barba premium", "preco": 35 }
+  ],
+
+  "profissionais": [
+    { "nome": "João", "foto": "joao.jpg", "servicos": ["Corte masculino"] },
+    { "nome": "Rafa", "foto": "rafa.jpg", "servicos": ["Barba premium"] }
+  ]
+}
