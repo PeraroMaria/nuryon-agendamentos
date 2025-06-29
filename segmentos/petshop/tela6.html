@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pet Shop - Confirmação</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background-color: #f7f9fc;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .main-color {
+      color: #0c1f4a;
+    }
+    .btn-main {
+      background-color: #0c1f4a;
+      color: white;
+    }
+    .btn-main:hover {
+      background-color: #092048;
+    }
+    .resumo-item {
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h2 class="text-center main-color mb-4">Resumo do Agendamento</h2>
+    
+    <div class="resumo-item"><strong>Cliente:</strong> <span id="nomeCliente"></span></div>
+    <div class="resumo-item"><strong>Email:</strong> <span id="emailCliente"></span></div>
+    <div class="resumo-item"><strong>Telefone:</strong> <span id="telefoneCliente"></span></div>
+
+    <div class="resumo-item"><strong>Categoria:</strong> <span id="categoria"></span></div>
+    <div class="resumo-item"><strong>Serviço:</strong> <span id="servico"></span></div>
+    <div class="resumo-item"><strong>Profissional:</strong> <span id="profissional"></span></div>
+
+    <div class="resumo-item"><strong>Data:</strong> <span id="data"></span></div>
+    <div class="resumo-item"><strong>Horário:</strong> <span id="horario"></span></div>
+
+    <div class="text-center mt-4">
+      <button class="btn btn-main btn-lg" onclick="finalizarAgendamento()">Confirmar Agendamento</button>
+    </div>
+  </div>
+
+  <script>
+    function preencherResumo() {
+      document.getElementById("nomeCliente").textContent = localStorage.getItem("nomeCliente") || "-";
+      document.getElementById("emailCliente").textContent = localStorage.getItem("emailCliente") || "-";
+      document.getElementById("telefoneCliente").textContent = localStorage.getItem("telefoneCliente") || "-";
+      document.getElementById("categoria").textContent = localStorage.getItem("categoriaSelecionada") || "-";
+      document.getElementById("servico").textContent = localStorage.getItem("servicoSelecionado") || "-";
+      document.getElementById("profissional").textContent = localStorage.getItem("profissionalSelecionado") || "-";
+      document.getElementById("data").textContent = localStorage.getItem("dataSelecionada") || "-";
+      document.getElementById("horario").textContent = localStorage.getItem("horarioSelecionado") || "-";
+    }
+
+    function finalizarAgendamento() {
+      alert("Agendamento confirmado com sucesso! 🐾");
+      localStorage.clear();
+      window.location.href = "empresa.html?empresa=petshop";
+    }
+
+    window.onload = preencherResumo;
+  </script>
+</body>
+</html>

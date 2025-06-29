@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pet Shop - Escolha a Categoria</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background-color: #f7f9fc;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .main-color {
+      color: #0c1f4a;
+    }
+    .btn-main {
+      background-color: #0c1f4a;
+      color: white;
+    }
+    .btn-main:hover {
+      background-color: #092048;
+    }
+    .categoria-card {
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .categoria-card:hover {
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h2 class="text-center main-color mb-4">Escolha a Categoria</h2>
+    <div class="row g-4" id="categoriasContainer">
+      <!-- Categorias aparecerão aqui -->
+    </div>
+  </div>
+
+  <script>
+    const categoriasContainer = document.getElementById('categoriasContainer');
+    const empresaJson = JSON.parse(localStorage.getItem("jsonEmpresa")) || {};
+    const servicos = empresaJson.servicos || [];
+
+    const categoriasUnicas = [...new Set(servicos.map(s => s.categoria))];
+
+    categoriasUnicas.forEach(cat => {
+      const col = document.createElement('div');
+      col.className = 'col-md-6';
+
+      const card = document.createElement('div');
+      card.className = 'card p-4 categoria-card shadow-sm';
+      card.innerHTML = `
+        <h5 class="main-color">${cat}</h5>
+        <p class="mb-0">Clique para ver os serviços da categoria ${cat}</p>
+      `;
+      card.onclick = () => {
+        localStorage.setItem('categoriaSelecionada', cat);
+        const empresa = new URLSearchParams(window.location.search).get('empresa');
+        window.location.href = `tela3.html?empresa=${empresa}`;
+      };
+
+      col.appendChild(card);
+      categoriasContainer.appendChild(col);
+    });
+  </script>
+</body>
+</html>

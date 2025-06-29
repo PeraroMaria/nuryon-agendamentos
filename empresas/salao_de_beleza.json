@@ -1,0 +1,36 @@
+{
+  "nome": "Salão Glamour",
+  "descricao": "Beleza, autoestima e bem-estar em um só lugar.",
+  "logo": "salao.png",
+  "imagem": "foto_salao.jpg",
+  "tema": "#8e24aa",
+  "whatsapp": "5511977777777",
+  "telefone": "11 97777-7777",
+  "endereco": "Rua das Rosas, 789 - Jardim Glamour, São Paulo - SP",
+
+  "facilidades": [
+    "Ambiente climatizado",
+    "Wi-Fi gratuito",
+    "Acessibilidade"
+  ],
+
+  "pagamentos": [
+    "Pix",
+    "Cartão de crédito",
+    "Cartão de débito"
+  ],
+
+  "horarios": [
+    { "dia": "Terça a Sábado", "horas": "10h às 19h" }
+  ],
+
+  "servicos": [
+    { "categoria": "Cabelos", "nome": "Escova Modelada", "preco": 80 },
+    { "categoria": "Unhas", "nome": "Manicure e Pedicure", "preco": 50 }
+  ],
+
+  "profissionais": [
+    { "nome": "Marina", "foto": "marina.jpg", "servicos": ["Escova Modelada"] },
+    { "nome": "Fernanda", "foto": "fernanda.jpg", "servicos": ["Manicure e Pedicure"] }
+  ]
+}

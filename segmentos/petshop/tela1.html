@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dados do Cliente - Nuryon</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f7f9fc;
+    }
+    .main-color {
+      color: #0c1f4a;
+    }
+    .bg-main {
+      background-color: #0c1f4a;
+    }
+    .form-container {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      font-weight: 600;
+    }
+    footer {
+      background-color: #0c1f4a;
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2 class="main-color text-center mb-4">Informe seus dados</h2>
+    <form action="tela2.html?empresa=petshop" method="GET">
+      <input type="hidden" name="empresa" value="petshop" />
+
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome completo</label>
+        <input type="text" class="form-control" id="nome" name="nome" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="telefone" class="form-label">Telefone</label>
+        <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(11) 99999-9999" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="voce@email.com" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="pet" class="form-label">Nome do Pet</label>
+        <input type="text" class="form-control" id="pet" name="pet" required />
+      </div>
+
+      <div class="mb-4">
+        <label for="porte" class="form-label">Porte do Pet</label>
+        <select class="form-select" id="porte" name="porte" required>
+          <option value="">Selecione</option>
+          <option value="pequeno">Pequeno</option>
+          <option value="médio">Médio</option>
+          <option value="grande">Grande</option>
+        </select>
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn bg-main text-white btn-lg">Avançar</button>
+      </div>
+    </form>
+  </div>
+
+  <footer>
+    © 2025 Nuryon. Todos os direitos reservados.
+  </footer>
+</body>
+</html>

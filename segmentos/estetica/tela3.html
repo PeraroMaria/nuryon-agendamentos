@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escolha um serviço - Clínica Essência</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f7f9fc;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .container {
+      padding-top: 40px;
+    }
+    .card {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card-title {
+      color: #8C2E9E;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center text-secondary mb-4">Escolha um serviço</h2>
+    <div class="row" id="servicosContainer"></div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoria = urlParams.get('categoria');
+    const empresa = urlParams.get('empresa') || 'estetica';
+
+    const servicosPorCategoria = {
+      "limpeza-de-pele": [
+        { nome: "Limpeza de Pele Profunda", preco: 120, descricao: "Remove impurezas e renova sua pele." },
+        { nome: "Peeling de Diamante", preco: 160, descricao: "Esfoliação profunda com resultados visíveis." }
+      ],
+      "massagem": [
+        { nome: "Massagem Relaxante", preco: 90, descricao: "Alivia tensões e melhora o bem-estar." },
+        { nome: "Massagem com Pedras Quentes", preco: 110, descricao: "Terapia profunda com pedras vulcânicas." }
+      ],
+      "depilacao": [
+        { nome: "Depilação a Laser", preco: 200, descricao: "Tecnologia moderna e eficaz." },
+        { nome: "Depilação com Cera", preco: 60, descricao: "Método tradicional, resultados duradouros." }
+      ]
+    };
+
+    const servicos = servicosPorCategoria[categoria] || [];
+    const container = document.getElementById('servicosContainer');
+
+    servicos.forEach((servico, index) => {
+      const col = document.createElement('div');
+      col.className = 'col-md-6 mb-4';
+      col.innerHTML = `
+        <div class="card p-3">
+          <div class="card-body">
+            <h5 class="card-title">${servico.nome}</h5>
+            <p class="card-text">${servico.descricao}</p>
+            <p><strong>R$ ${servico.preco.toFixed(2)}</strong></p>
+            <button class="btn btn-primary" onclick="selecionarServico('${servico.nome}')">Selecionar</button>
+          </div>
+        </div>
+      `;
+      container.appendChild(col);
+    });
+
+    function selecionarServico(servico) {
+      window.location.href = `tela4.html?empresa=${empresa}&categoria=${categoria}&servico=${encodeURIComponent(servico)}`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escolha o Profissional - Clínica Essência</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f7f9fc;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .container {
+      padding-top: 40px;
+    }
+    .card {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card-img-top {
+      border-radius: 12px 12px 0 0;
+      height: 250px;
+      object-fit: cover;
+    }
+    .card-title {
+      color: #8C2E9E;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center text-secondary mb-4">Escolha o profissional</h2>
+    <div class="row" id="profissionaisContainer"></div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const empresa = urlParams.get('empresa') || 'estetica';
+    const servico = urlParams.get('servico');
+
+    const profissionais = [
+      { nome: "Ana", foto: "ana.jpg", servicos: ["Limpeza de Pele Profunda", "Peeling de Diamante"] },
+      { nome: "Fernanda", foto: "fernanda.jpg", servicos: ["Massagem Relaxante", "Massagem com Pedras Quentes"] },
+      { nome: "Patrícia", foto: "patricia.jpg", servicos: ["Depilação a Laser", "Depilação com Cera"] }
+    ];
+
+    const container = document.getElementById('profissionaisContainer');
+    const filtrados = profissionais.filter(p => p.servicos.includes(servico));
+
+    filtrados.forEach(prof => {
+      const col = document.createElement('div');
+      col.className = 'col-md-6 mb-4';
+      col.innerHTML = `
+        <div class="card">
+          <img src="img/${prof.foto}" class="card-img-top" alt="${prof.nome}">
+          <div class="card-body text-center">
+            <h5 class="card-title">${prof.nome}</h5>
+            <button class="btn btn-primary" onclick="escolher('${prof.nome}')">Selecionar</button>
+          </div>
+        </div>
+      `;
+      container.appendChild(col);
+    });
+
+    function escolher(nome) {
+      window.location.href = `tela5.html?empresa=${empresa}&servico=${encodeURIComponent(servico)}&profissional=${encodeURIComponent(nome)}`;
+    }
+  </script>
+</body>
+</html>

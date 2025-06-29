@@ -2,8 +2,28 @@
   "nome": "Barbearia Estilo Fino",
   "descricao": "Especialistas em cortes masculinos.",
   "logo": "barbearia.png",
+  "imagem": "foto_barbearia.jpg",
   "tema": "#0c1f4a",
   "whatsapp": "5511999999999",
+  "telefone": "11 99999-9999",
+  "endereco": "Rua das Navalhas, 123 - Centro, São Paulo - SP",
+
+  "facilidades": [
+    "Wi-Fi gratuito",
+    "Ar-condicionado",
+    "Estacionamento no local"
+  ],
+
+  "pagamentos": [
+    "Cartão de crédito",
+    "Pix",
+    "Dinheiro"
+  ],
+
+  "horarios": [
+    { "dia": "Segunda a Sexta", "horas": "09h às 20h" },
+    { "dia": "Sábado", "horas": "09h às 18h" }
+  ],
 
   "servicos": [
     { "categoria": "Cabelos", "nome": "Corte masculino", "preco": 40 },

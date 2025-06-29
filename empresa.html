@@ -96,7 +96,6 @@
         </div>
       </div>
 
-      <!-- NOVO BLOCO para exibir serviços -->
       <div class="col-md-6">
         <div class="card p-4 card-style">
           <h5 class="main-color mb-3">Serviços em destaque</h5>
@@ -117,7 +116,7 @@
     </div>
 
     <div class="text-center mt-5">
-      <a href="telas/tela1.html" class="btn btn-lg bg-main text-white">Começar Agendamento</a>
+      <a id="btnAgendamento" href="#" class="btn btn-lg bg-main text-white">Começar Agendamento</a>
     </div>
   </div>
 
@@ -147,6 +146,39 @@
     </div>
   </footer>
 
-  <script src="js/loader.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const segmento = urlParams.get('segmento');
+
+    if (!segmento) {
+      alert("Segmento não informado na URL. Ex: empresa.html?segmento=barbearia");
+      throw new Error("Segmento ausente");
+    }
+
+    fetch(`empresas/${segmento}.json`)
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('logoEmpresa').src = data.logo;
+        document.getElementById('nomeEmpresa').innerText = data.nome;
+        document.getElementById('descricaoEmpresa').innerText = data.descricao;
+        document.getElementById('imgEstabelecimento').src = data.foto;
+
+        document.getElementById('enderecoEmpresa').innerText = data.endereco;
+        document.getElementById('whatsappEmpresa').href = `https://wa.me/${data.whatsapp}`;
+        document.getElementById('whatsappEmpresa').innerText = data.whatsapp;
+        document.getElementById('telefoneEmpresa').innerText = data.telefone;
+
+        document.getElementById('facilidadesList').innerHTML = data.facilidades.map(f => `<p><i class="fas fa-check facility-icon"></i>${f}</p>`).join('');
+        document.getElementById('pagamentosList').innerHTML = data.pagamentos.map(p => `<p><i class="fas fa-credit-card payment-icon"></i>${p}</p>`).join('');
+        document.getElementById('horariosEmpresa').innerHTML = data.horarios.map(h => `<p>${h}</p>`).join('');
+        document.getElementById('lista-servicos').innerHTML = data.servicos.slice(0, 3).map(s => `<li>• ${s}</li>`).join('');
+
+        document.getElementById('btnAgendamento').href = `segmentos/${segmento}/tela1.html`;
+      })
+      .catch(error => {
+        console.error('Erro ao carregar os dados da empresa:', error);
+        alert('Erro ao carregar informações da empresa.');
+      });
+  </script>
 </body>
 </html>

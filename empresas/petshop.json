@@ -1,0 +1,38 @@
+{
+  "nome": "Pet Shop Bicho Feliz",
+  "descricao": "Cuidados e carinho para seu pet.",
+  "logo": "petshop.png",
+  "imagem": "foto_petshop.jpg",
+  "tema": "#00796b",
+  "whatsapp": "5511988888888",
+  "telefone": "11 98888-8888",
+  "endereco": "Av. dos Animais, 456 - Vila Pet, São Paulo - SP",
+
+  "facilidades": [
+    "Banho e Tosa",
+    "Atendimento veterinário",
+    "Pet taxi"
+  ],
+
+  "pagamentos": [
+    "Cartão de crédito",
+    "Cartão de débito",
+    "Dinheiro",
+    "Pix"
+  ],
+
+  "horarios": [
+    { "dia": "Segunda a Sexta", "horas": "08h às 19h" },
+    { "dia": "Sábado", "horas": "08h às 15h" }
+  ],
+
+  "servicos": [
+    { "categoria": "Banho", "nome": "Banho Pequeno Porte", "preco": 50 },
+    { "categoria": "Tosa", "nome": "Tosa Higiênica", "preco": 40 }
+  ],
+
+  "profissionais": [
+    { "nome": "Ana Paula", "foto": "ana_paula.jpg", "servicos": ["Banho Pequeno Porte"] },
+    { "nome": "Carlos", "foto": "carlos.jpg", "servicos": ["Tosa Higiênica"] }
+  ]
+}

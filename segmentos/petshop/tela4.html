@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pet Shop - Escolha o Profissional</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background-color: #f7f9fc;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .main-color {
+      color: #0c1f4a;
+    }
+    .btn-main {
+      background-color: #0c1f4a;
+      color: white;
+    }
+    .btn-main:hover {
+      background-color: #092048;
+    }
+    .prof-card {
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .prof-card:hover {
+      transform: scale(1.02);
+    }
+    .prof-img {
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h2 class="text-center main-color mb-4" id="tituloServico">Escolha o profissional</h2>
+    <div class="row g-4" id="profissionaisContainer">
+      <!-- Cards de profissionais -->
+    </div>
+  </div>
+
+  <script>
+    const empresa = JSON.parse(localStorage.getItem("jsonEmpresa")) || {};
+    const servico = JSON.parse(localStorage.getItem("servicoSelecionado")) || {};
+    const container = document.getElementById("profissionaisContainer");
+    const titulo = document.getElementById("tituloServico");
+
+    titulo.innerText = `Profissionais para: ${servico.nome}`;
+
+    const profissionais = empresa.profissionais?.filter(p =>
+      p.servicos.includes(servico.nome)
+    ) || [];
+
+    profissionais.forEach(prof => {
+      const col = document.createElement("div");
+      col.className = "col-md-6";
+
+      const card = document.createElement("div");
+      card.className = "card p-3 shadow-sm prof-card";
+      card.innerHTML = `
+        <img src="img/${prof.foto}" class="prof-img mb-3" alt="${prof.nome}" />
+        <h5 class="main-color text-center">${prof.nome}</h5>
+        <button class="btn btn-main w-100 mt-3">Selecionar</button>
+      `;
+      card.onclick = () => {
+        localStorage.setItem("profissionalSelecionado", JSON.stringify(prof));
+        const empresaId = new URLSearchParams(window.location.search).get("empresa");
+        window.location.href = `tela5.html?empresa=${empresaId}`;
+      };
+
+      col.appendChild(card);
+      container.appendChild(col);
+    });
+  </script>
+</body>
+</html>

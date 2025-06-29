@@ -1,94 +1,104 @@
-/*  loader.js
- *  Lê ?empresa=ID na URL, busca o JSON da empresa
- *  e preenche o conteúdo da página empresa.html
- */
+// loader.js
+// Carrega dados de uma empresa com base no parâmetro da URL (?empresa=ID)
 
 (function () {
-  // --- 1. Descobre o ID da empresa ---
-  const params    = new URLSearchParams(window.location.search);
+  // 1. Coleta o ID da empresa pela URL
+  const params = new URLSearchParams(window.location.search);
   const empresaId = params.get("empresa");
 
-  // Se não veio parâmetro, mostra erro simples
   if (!empresaId) {
     document.body.innerHTML = "<h2 style='text-align:center;color:#c00;margin-top:2rem'>Empresa não especificada na URL.</h2>";
     return;
   }
 
-  // --- 2. Busca o JSON correspondente ---
+  // 2. Busca os dados da empresa via JSON
   fetch(`empresas/${empresaId}.json`)
-    .then(r => {
-      if (!r.ok) throw new Error("Empresa não encontrada.");
-      return r.json();
+    .then(response => {
+      if (!response.ok) throw new Error("Empresa não encontrada.");
+      return response.json();
     })
-    .then(data => preencherTela(data))
+    .then(data => preencherDados(data))
     .catch(err => {
       document.body.innerHTML = `<h2 style='text-align:center;color:#c00;margin-top:2rem'>${err.message}</h2>`;
-      console.error(err);
+      console.error("Erro ao carregar empresa:", err);
     });
 
-  // --- 3. Preenche todos os campos da página ---
-  function preencherTela(d) {
-    // Tema de cor (opcional no JSON)
-    if (d.tema) {
-      document.documentElement.style.setProperty("--bs-primary", d.tema);
+  // 3. Preenche os dados na página HTML
+  function preencherDados(dados) {
+    // Aplica cor do tema (se definido no JSON)
+    if (dados.tema) {
+      document.documentElement.style.setProperty("--bs-primary", dados.tema);
     }
 
     // Cabeçalho
-    document.getElementById("logoEmpresa").src        = `img/${d.logo}`;
-    document.getElementById("nomeEmpresa").innerText   = d.nome;
-    document.getElementById("descricaoEmpresa").innerText = d.descricao || "";
+    document.getElementById("logoEmpresa").src = `img/${dados.logo}`;
+    document.getElementById("nomeEmpresa").innerText = dados.nome || "Sem nome";
+    document.getElementById("descricaoEmpresa").innerText = dados.descricao || "";
 
     // Imagem principal
-    document.getElementById("imgEstabelecimento").src  = `img/${d.imagem}`;
+    document.getElementById("imgEstabelecimento").src = `img/${dados.imagem}`;
 
     // Facilidades
-    const facWrap = document.getElementById("facilidadesList");
-    (d.facilidades || []).forEach(f => {
+    const facilidades = dados.facilidades || [];
+    const facilidadesEl = document.getElementById("facilidadesList");
+    facilidadesEl.innerHTML = "";
+    facilidades.forEach(item => {
       const p = document.createElement("p");
-      p.innerHTML = `<i class="fas fa-check facility-icon"></i>${f}`;
-      facWrap.appendChild(p);
+      p.innerHTML = `<i class="fas fa-check facility-icon"></i> ${item}`;
+      facilidadesEl.appendChild(p);
     });
 
     // Pagamentos
-    const pagWrap = document.getElementById("pagamentosList");
-    (d.pagamentos || []).forEach(p => {
-      const div = document.createElement("p");
-      div.innerHTML = `<i class="fas fa-credit-card payment-icon"></i>${p}`;
-      pagWrap.appendChild(div);
-    });
-
-    // Endereço e contatos
-    document.getElementById("enderecoEmpresa").innerText  = d.endereco || "-";
-    document.getElementById("telefoneEmpresa").innerText  = d.telefone || "-";
-    const waLink = document.getElementById("whatsappEmpresa");
-    waLink.href  = `https://wa.me/${d.whatsapp}`;
-    waLink.innerText = formataTel(d.whatsapp);
-
-    // Horários
-    const horarios = document.getElementById("horariosEmpresa");
-    (d.horarios || []).forEach(h => {
+    const pagamentos = dados.pagamentos || [];
+    const pagamentosEl = document.getElementById("pagamentosList");
+    pagamentosEl.innerHTML = "";
+    pagamentos.forEach(item => {
       const p = document.createElement("p");
-      p.innerText = h;
-      horarios.appendChild(p);
+      p.innerHTML = `<i class="fas fa-credit-card payment-icon"></i> ${item}`;
+      pagamentosEl.appendChild(p);
     });
 
-    // Serviços rápidos (até 4)
-    const ulServ = document.getElementById("lista-servicos");
-    if (ulServ) {
-    (d.servicos || []).slice(0, 4).forEach(s => {
-        const li = document.createElement("li");
-        li.innerText = `• ${s.nome}`;
-        ulServ.appendChild(li);
+    // Serviços em destaque
+    const servicos = dados.servicos || [];
+    const servicosEl = document.getElementById("lista-servicos");
+    servicosEl.innerHTML = "";
+    servicos.slice(0, 4).forEach(servico => {
+      const li = document.createElement("li");
+      li.innerText = `• ${servico.nome || servico}`;
+      servicosEl.appendChild(li);
     });
-    }
 
+    // Endereço e Contatos
+    document.getElementById("enderecoEmpresa").innerText = dados.endereco || "-";
+    document.getElementById("telefoneEmpresa").innerText = dados.telefone || "-";
 
-    // Guarda JSON inteiro em localStorage para as próximas telas
-    localStorage.setItem("jsonEmpresa", JSON.stringify(d));
+    const waLink = document.getElementById("whatsappEmpresa");
+    waLink.href = `https://wa.me/${dados.whatsapp?.replace(/\D/g, "")}`;
+    waLink.innerText = formatarTelefone(dados.whatsapp);
+
+    // Horários de funcionamento
+    const horarios = dados.horarios || [];
+    const horariosEl = document.getElementById("horariosEmpresa");
+    horariosEl.innerHTML = "";
+    horarios.forEach(item => {
+      const p = document.createElement("p");
+      if (typeof item === "string") {
+        p.innerText = item;
+      } else {
+        p.innerText = `${item.dia || ""}: ${item.horas || ""}`;
+      }
+      horariosEl.appendChild(p);
+    });
+
+    // Salva o JSON completo no localStorage para uso nas próximas telas
+    localStorage.setItem("jsonEmpresa", JSON.stringify(dados));
   }
 
-  // util para telefone
-  function formataTel(tel) {
-    return tel.replace(/^55/, "+55 ");
+  // 4. Função auxiliar para formatar o número do WhatsApp
+  function formatarTelefone(tel) {
+    if (!tel) return "-";
+    tel = tel.replace(/\D/g, "");
+    if (tel.startsWith("55")) tel = "+" + tel;
+    return tel.replace(/^(\+\d{2})(\d{2})(\d{5})(\d{4})$/, "$1 ($2) $3-$4");
   }
 })();
