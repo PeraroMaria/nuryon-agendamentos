@@ -32,6 +32,10 @@
   </div>
 
   <script>
+  document.getElementById('nome').value = localStorage.getItem('clienteNome') || '';
+  document.getElementById('email').value = localStorage.getItem('clienteEmail') || '';
+  document.getElementById('telefone').value = localStorage.getItem('clienteTelefone') || '';
+
     document.getElementById('form-cliente').addEventListener('submit', e=>{
       e.preventDefault();
       // grava no localStorage
@@ -39,7 +43,10 @@
       localStorage.setItem('clienteEmail', document.getElementById('email').value.trim());
       localStorage.setItem('clienteTelefone', document.getElementById('telefone').value.trim());
       // segue para a próxima etapa
-      window.location.href = 'tela2.html';
+      const params = new URLSearchParams(window.location.search);
+      const empresa = params.get("empresa");
+      window.location.href = `tela2.html?empresa=${empresa}`;
+
     });
   </script>
 </body>

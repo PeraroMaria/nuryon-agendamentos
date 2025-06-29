@@ -76,46 +76,24 @@
   </div>
 
   <script>
-    const profissionaisPorServico = {
-      'Limpeza de Pele': [
-        { nome: 'Juliana', foto: 'img/juliana.jpg', descricao: 'Esteticista' },
-        { nome: 'Amanda', foto: 'img/amanda.jpg', descricao: 'Especialista em pele' }
-      ],
-      'Massagem Relaxante': [
-        { nome: 'Amanda', foto: 'img/amanda.jpg', descricao: 'Massoterapeuta' },
-        { nome: 'Paula', foto: 'img/paula.jpg', descricao: 'Fisioterapeuta' }
-      ],
-      'Botox': [
-        { nome: 'Amanda', foto: 'img/amanda.jpg', descricao: 'Especialista em botox' }
-      ],
-      'Corte Masculino': [
-        { nome: 'Lucas', foto: 'img/lucas.jpg', descricao: 'Especialista em cortes masculinos' }
-      ],
-      'Corte + Barba + Sobrancelha': [
-        { nome: 'Lucas', foto: 'img/lucas.jpg', descricao: 'Corte completo e estilo' },
-        { nome: 'Rafael', foto: 'img/rafael.jpg', descricao: 'Barbeiro sênior' }
-      ],
-      'Barba e Bigode': [
-        { nome: 'Rafael', foto: 'img/rafael.jpg', descricao: 'Barbeiro sênior' }
-      ]
-    };
-
-    const servico = localStorage.getItem('servicoSelecionado');
-    document.getElementById('tituloPagina').innerText = `Profissionais para ${servico}`;
+    const dados = JSON.parse(localStorage.getItem('jsonEmpresa'));
+    const servicoSelecionado = localStorage.getItem('servicoSelecionado');
+    document.getElementById('tituloPagina').innerText = `Profissionais para ${servicoSelecionado}`;
 
     const container = document.getElementById('profissionaisContainer');
-    const lista = profissionaisPorServico[servico] || [];
 
-    lista.forEach(p => {
+    const profissionais = dados.profissionais.filter(p => p.servicos.includes(servicoSelecionado));
+
+    profissionais.forEach(p => {
       const col = document.createElement('div');
       col.className = 'col-md-4 d-flex';
 
       const card = document.createElement('div');
       card.className = 'professional-card w-100';
       card.innerHTML = `
-        <img src="${p.foto}" alt="${p.nome}">
+        <img src="img/${p.foto}" alt="${p.nome}">
         <div class="professional-name">${p.nome}</div>
-        <div class="professional-desc">${p.descricao}</div>
+        <div class="professional-desc">Especialista</div>
       `;
       card.onclick = () => selecionar(card, p.nome);
 
@@ -123,7 +101,7 @@
       container.appendChild(col);
     });
 
-    // Adiciona opção "Não tenho preferência"
+    // Adiciona "Não tenho preferência"
     const col = document.createElement('div');
     col.className = 'col-md-4 d-flex';
     const card = document.createElement('div');

@@ -52,9 +52,7 @@
       <p class="text-muted">Selecione o serviço desejado da categoria escolhida</p>
     </div>
 
-    <div class="row g-4" id="servicoContainer">
-      <!-- Serviços serão inseridos via JavaScript -->
-    </div>
+    <div class="row g-4" id="servicoContainer"></div>
 
     <div class="text-center mt-5">
       <button class="btn-next" disabled id="nextButton" onclick="irParaProfissionais()">Avançar</button>
@@ -62,39 +60,17 @@
   </div>
 
   <script>
-    const servicosPorCategoria = {
-      'Cabelos': [
-        { titulo: 'Corte Masculino', duracao: '30min', preco: 'R$ 40,00' },
-        { titulo: 'Corte + Barba + Sobrancelha', duracao: '60min', preco: 'R$ 70,00' }
-      ],
-      'Barbearia': [
-        { titulo: 'Barba e Bigode', duracao: '20min', preco: 'R$ 25,00' },
-        { titulo: 'Modelagem de Barba', duracao: '30min', preco: 'R$ 35,00' }
-      ],
-      'Sobrancelhas': [
-        { titulo: 'Design de Sobrancelha', duracao: '20min', preco: 'R$ 20,00' },
-        { titulo: 'Sobrancelha com Henna', duracao: '30min', preco: 'R$ 30,00' }
-      ],
-      'Unhas': [
-        { titulo: 'Manicure', duracao: '30min', preco: 'R$ 25,00' },
-        { titulo: 'Pedicure', duracao: '30min', preco: 'R$ 25,00' }
-      ],
-      'Depilação': [
-        { titulo: 'Depilação Axilas', duracao: '15min', preco: 'R$ 20,00' },
-        { titulo: 'Depilação Meia Perna', duracao: '30min', preco: 'R$ 40,00' }
-      ],
-      'Estética': [
-        { titulo: 'Limpeza de Pele', duracao: '60min', preco: 'R$ 80,00' },
-        { titulo: 'Massagem Relaxante', duracao: '60min', preco: 'R$ 90,00' },
-        { titulo: 'Botox', duracao: '40min', preco: 'R$ 150,00' }
-      ]
-    };
+    const params = new URLSearchParams(window.location.search);
+    const empresa = params.get("empresa");
 
     const categoria = localStorage.getItem('categoriaSelecionada');
     document.getElementById('categoriaTitulo').innerText = `Serviços de ${categoria}`;
 
     const container = document.getElementById('servicoContainer');
-    const lista = servicosPorCategoria[categoria] || [];
+    const dados = JSON.parse(localStorage.getItem("jsonEmpresa"));
+    const lista = dados.servicos.filter(s => s.categoria === categoria);
+
+    let servicoSelecionado = "";
 
     lista.forEach(servico => {
       const col = document.createElement('div');
@@ -103,28 +79,32 @@
       const card = document.createElement('div');
       card.className = 'service-card';
       card.innerHTML = `
-        <div class="service-title">${servico.titulo}</div>
-        <div class="service-desc">Duração: ${servico.duracao}<br>${servico.preco}</div>
+        <div class="service-title">${servico.nome}</div>
+        <div class="service-desc">
+          Duração: ${servico.duracao || '30'}min<br>
+          Preço: R$ ${Number(servico.preco).toFixed(2).replace('.', ',')}
+        </div>
       `;
-      card.onclick = () => selecionar(card, servico.titulo);
+      card.onclick = () => selecionar(card, servico.nome);
 
       col.appendChild(card);
       container.appendChild(col);
     });
 
-    function selecionar(el, titulo) {
+    function selecionar(el, nome) {
       document.querySelectorAll('.service-card').forEach(card => {
         card.style.border = 'none';
         card.style.fontWeight = 'normal';
       });
       el.style.border = '2px solid #0c1f4a';
       el.style.fontWeight = '600';
+      servicoSelecionado = nome;
       document.getElementById('nextButton').disabled = false;
-      localStorage.setItem('servicoSelecionado', titulo);
+      localStorage.setItem('servicoSelecionado', nome);
     }
 
     function irParaProfissionais() {
-      window.location.href = 'tela4.html';
+      window.location.href = `tela4.html?empresa=${empresa}`;
     }
   </script>
 </body>

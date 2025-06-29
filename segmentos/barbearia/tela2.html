@@ -44,26 +44,7 @@
       <p class="text-muted">Selecione a área desejada para continuar o agendamento</p>
     </div>
 
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="category-card text-center" onclick="selectCategory(this)">Cabelos</div>
-      </div>
-      <div class="col-md-4">
-        <div class="category-card text-center" onclick="selectCategory(this)">Barbearia</div>
-      </div>
-      <div class="col-md-4">
-        <div class="category-card text-center" onclick="selectCategory(this)">Sobrancelhas</div>
-      </div>
-      <div class="col-md-4">
-        <div class="category-card text-center" onclick="selectCategory(this)">Unhas</div>
-      </div>
-      <div class="col-md-4">
-        <div class="category-card text-center" onclick="selectCategory(this)">Depilação</div>
-      </div>
-      <div class="col-md-4">
-        <div class="category-card text-center" onclick="selectCategory(this)">Estética</div>
-      </div>
-    </div>
+    <div class="row g-4" id="categoriasContainer"></div>
 
     <div class="text-center mt-5">
       <button class="btn-next" disabled id="nextButton" onclick="goToServices()">Avançar</button>
@@ -71,7 +52,29 @@
   </div>
 
   <script>
+    const params = new URLSearchParams(window.location.search);
+    const empresa = params.get("empresa");
+
     let selectedCategory = "";
+
+    function renderCategorias() {
+      const container = document.getElementById("categoriasContainer");
+      const dados = JSON.parse(localStorage.getItem("jsonEmpresa"));
+      const categoriasUnicas = [...new Set(dados.servicos.map(s => s.categoria))];
+
+      categoriasUnicas.forEach(categoria => {
+        const col = document.createElement("div");
+        col.className = "col-md-4";
+
+        const card = document.createElement("div");
+        card.className = "category-card text-center";
+        card.innerText = categoria;
+        card.onclick = () => selectCategory(card);
+
+        col.appendChild(card);
+        container.appendChild(col);
+      });
+    }
 
     function selectCategory(el) {
       document.querySelectorAll('.category-card').forEach(card => {
@@ -86,8 +89,11 @@
 
     function goToServices() {
       localStorage.setItem('categoriaSelecionada', selectedCategory);
-      window.location.href = 'tela3.html';
+      window.location.href = `tela3.html?empresa=${empresa}`;
     }
+
+    // inicializa ao carregar
+    renderCategorias();
   </script>
 </body>
 </html>
