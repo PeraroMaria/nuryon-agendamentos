@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agendamento - Nuryon Estética</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f7f9fc;
+      color: #1a1a1a;
+    }
+    .main-color {
+      color: #8C2E9E;
+    }
+    .bg-main {
+      background-color: #8C2E9E;
+    }
+    .facility-icon, .payment-icon {
+      font-size: 1.5rem;
+      margin-right: 10px;
+      color: #8C2E9E;
+    }
+    .card-style {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    footer {
+      background-color: #8C2E9E;
+      color: white;
+      padding: 40px 0;
+    }
+    .footer-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .footer-icon {
+      font-size: 1.5rem;
+      margin-right: 15px;
+      color: white;
+    }
+    .img-estabelecimento {
+      width: 100%;
+      height: 100%;
+      max-height: 350px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: block;
+    }
+    @media (max-width: 767px) {
+      .img-estabelecimento {
+        max-height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <div class="text-center mb-4">
+      <img id="logoEmpresa" src="../img/estetica-logo.png" alt="Logo" width="150" />
+      <h1 id="nomeEmpresa" class="main-color mt-2">Clínica Essência</h1>
+      <p id="descricaoEmpresa" class="lead">Beleza, cuidado e bem-estar em um só lugar.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <img id="imgEstabelecimento" src="../img/estetica-fachada.jpg" class="img-estabelecimento" alt="Foto do estabelecimento" />
+      </div>
+
+      <div class="col-md-6">
+        <div class="card p-4 card-style">
+          <h5 class="main-color mb-3">Facilidades</h5>
+          <p><i class="fas fa-wifi facility-icon"></i> Wi-Fi gratuito</p>
+          <p><i class="fas fa-coffee facility-icon"></i> Café e água</p>
+          <p><i class="fas fa-spa facility-icon"></i> Sala aromaterápica</p>
+          <p><i class="fas fa-wheelchair facility-icon"></i> Acessível para PCD</p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card p-4 card-style">
+          <h5 class="main-color mb-3">Formas de pagamento</h5>
+          <p><i class="fas fa-credit-card payment-icon"></i> Cartão de crédito</p>
+          <p><i class="fas fa-money-bill payment-icon"></i> Dinheiro</p>
+          <p><i class="fas fa-barcode payment-icon"></i> Pix</p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card p-4 card-style">
+          <h5 class="main-color mb-3">Serviços em destaque</h5>
+          <ul class="list-unstyled mb-0">
+            <li>• Limpeza de pele profunda</li>
+            <li>• Massagem relaxante</li>
+            <li>• Drenagem linfática</li>
+            <li>• Depilação a laser</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card p-4 card-style">
+          <h5 class="main-color mb-3">Localização e Contato</h5>
+          <p><i class="fas fa-map-marker-alt"></i> Rua da Estética, 101 - Centro, São Paulo - SP</p>
+          <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/5511988887777" target="_blank">+55 11 98888-7777</a></p>
+          <p><i class="fas fa-phone"></i> (11) 4002-8922</p>
+          <h6 class="main-color mt-3">Horário de Funcionamento</h6>
+          <p>Seg a Sex: 9h - 19h</p>
+          <p>Sábados: 9h - 15h</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="tela1.html?empresa=estetica" class="btn btn-lg bg-main text-white">Começar Agendamento</a>
+    </div>
+  </div>
+
+  <footer class="mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="footer-title">Conheça</div>
+          <p><a href="#">Tratamentos</a> | <a href="#">Massagens</a></p>
+          <p><a href="#">Faciais</a> | <a href="#">Corpo</a></p>
+        </div>
+        <div class="col-md-4">
+          <div class="footer-title">Ajuda</div>
+          <p><a href="#">Termos de uso</a></p>
+          <p><a href="#">Política de privacidade</a></p>
+        </div>
+        <div class="col-md-4">
+          <div class="footer-title">Redes sociais</div>
+          <a href="#"><i class="fab fa-facebook footer-icon"></i></a>
+          <a href="#"><i class="fab fa-instagram footer-icon"></i></a>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <small>© 2025 Clínica Essência | Powered by Nuryon</small>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

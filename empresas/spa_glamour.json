@@ -1,0 +1,52 @@
+{
+  "nome": "Spa Glamour",
+  "descricao": "Experiências de luxo e bem-estar para renovar corpo e mente.",
+  "logo": "logo_spa_glamour.png",
+  "imagem": "spa_glamour_fachada.jpg",
+  "tema": "#d4af37",
+
+  "facilidades": [
+    "Spa day completo",
+    "Estacionamento coberto",
+    "Bebidas relaxantes inclusas",
+    "Ambiente aromatizado e silencioso"
+  ],
+
+  "pagamentos": [
+    "Cartão de crédito",
+    "Pix",
+    "Transferência bancária",
+    "Dinheiro"
+  ],
+
+  "endereco": "Rua da Paz, 1001 - Jardim Nobre, São Paulo - SP",
+  "telefone": "(11) 3020-7788",
+  "whatsapp": "(11) 91345-6789",
+
+  "horarios": [
+    { "dia": "Todos os dias", "horas": "08:00 às 20:00" }
+  ],
+
+  "servicos": [
+    { "nome": "Day Spa completo" },
+    { "nome": "Massagem relaxante" },
+    { "nome": "Esfoliação corporal" },
+    { "nome": "Banho de imersão" }
+  ],
+
+  "footer": {
+    "col1": {
+      "titulo": "Glamour Spa",
+      "links": ["Sobre nós", "Ambientes"]
+    },
+    "col2": {
+      "titulo": "Atendimentos",
+      "links": ["Corporais", "Relaxamento"]
+    },
+    "col3": {
+      "titulo": "Contato",
+      "links": ["WhatsApp", "E-mail", "Instagram"]
+    },
+    "copy": "© 2025 Spa Glamour - Viva a experiência do luxo."
+  }
+}

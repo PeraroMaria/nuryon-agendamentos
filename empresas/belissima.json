@@ -1,0 +1,21 @@
+{
+  "nome": "Belíssima",
+  "descricao": "Salão de beleza completo para você.",
+  "logo": "belissima_logo.png",
+  "imagem": "belissima_fachada.jpg",
+  "tema": "#ff69b4",
+  "facilidades": ["Estacionamento", "Wi-Fi grátis"],
+  "pagamentos": ["Dinheiro", "Cartão", "Pix"],
+  "endereco": "Rua das Flores, 123 - Centro",
+  "telefone": "(11) 1234-5678",
+  "whatsapp": "(11) 98765-4321",
+  "horarios": [
+    {"dia": "Seg a Sex", "horas": "09:00 - 19:00"},
+    {"dia": "Sábado", "horas": "08:00 - 16:00"}
+  ],
+  "servicos": [
+    {"nome": "Escova"},
+    {"nome": "Corte Feminino"},
+    {"nome": "Manicure"}
+  ]
+}

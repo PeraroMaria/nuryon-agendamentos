@@ -1,0 +1,53 @@
+{
+  "nome": "Estética Premium",
+  "descricao": "Seu bem-estar em primeiro lugar com os melhores tratamentos faciais e corporais.",
+  "logo": "logo_estetica.png",
+  "imagem": "estetica_fachada.jpg",
+  "tema": "#f6c1d4",
+
+  "facilidades": [
+    "Wi-Fi gratuito",
+    "Café e água para clientes",
+    "Ambiente climatizado",
+    "Espaço Instagramável"
+  ],
+
+  "pagamentos": [
+    "Dinheiro",
+    "Pix",
+    "Cartão de débito",
+    "Cartão de crédito"
+  ],
+
+  "endereco": "Rua da Beleza, 456 - Centro, São Paulo - SP",
+  "telefone": "(11) 3000-1234",
+  "whatsapp": "(11) 91111-2233",
+
+  "horarios": [
+    { "dia": "Segunda a Sexta", "horas": "09:00 às 19:00" },
+    { "dia": "Sábado", "horas": "09:00 às 15:00" }
+  ],
+
+  "servicos": [
+    { "nome": "Massagem relaxante" },
+    { "nome": "Limpeza de pele" },
+    { "nome": "Microagulhamento" },
+    { "nome": "Tratamentos faciais" }
+  ],
+
+  "footer": {
+    "col1": {
+      "titulo": "Sobre Nós",
+      "links": ["Nossa História", "Missão e Visão"]
+    },
+    "col2": {
+      "titulo": "Tratamentos",
+      "links": ["Faciais", "CorporaIs", "Pacotes"]
+    },
+    "col3": {
+      "titulo": "Fale Conosco",
+      "links": ["WhatsApp", "Instagram"]
+    },
+    "copy": "© 2025 Estética Premium - Todos os direitos reservados."
+  }
+}

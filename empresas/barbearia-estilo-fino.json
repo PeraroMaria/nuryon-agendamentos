@@ -1,8 +1,16 @@
 {
-  "slug": "barbearia-estilo-fino",
-  "segmento": "barbearia",
   "nome": "Barbearia Estilo Fino",
-  "descricao": "Especialistas em cortes masculinos.",
-  "logo": "logo_estilo_fino.png",
-  "imagem": "foto_estilo_fino.jpg"
+  "descricao": "Especialistas em cortes masculinos. Cuidando da sua autoestima com excelência.",
+  "logo": "logo_barbearia.png",
+  "imagem": "estabelecimento.png",
+  "facilidades": ["Wi-Fi", "Estacionamento", "Atendemos adultos e crianças", "TV", "Aceita cartão"],
+  "pagamentos": ["PIX", "Cartão de Crédito", "Dinheiro", "Visa", "Mastercard"],
+  "endereco": "Rua Estilo, 123 - Centro, SP",
+  "telefone": "(11) 3333-3333",
+  "whatsapp": "11999999999",
+  "horarios": [
+    { "dia": "Seg a Sex", "horas": "09h - 20h" },
+    { "dia": "Sábado", "horas": "08h - 18h" },
+    "Domingo: Fechado"
+  ]
 }

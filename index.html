@@ -10,19 +10,16 @@
       padding: 2rem;
       background-color: #f4f4f4;
     }
-
     h1 {
       text-align: center;
       color: #333;
     }
-
     ul {
       max-width: 600px;
       margin: 2rem auto;
       list-style: none;
       padding: 0;
     }
-
     li {
       background-color: white;
       border: 1px solid #ddd;
@@ -32,11 +29,9 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       transition: all 0.2s;
     }
-
     li:hover {
       background-color: #e9f0ff;
     }
-
     a {
       color: #0d6efd;
       text-decoration: none;
@@ -47,10 +42,32 @@
 </head>
 <body>
   <h1>Selecione a Empresa</h1>
-<ul>
-  <li><a href="segmentos/barbearia/tela0.html?empresa=barbearia">Barbearia</a></li>
-  <li><a href="segmentos/petshop/tela0.html?empresa=petshop">Petshop</a></li>
-  <li><a href="segmentos/estetica/tela0.html?empresa=estetica">Clínica de Estética</a></li>
-</ul>
+  <ul id="listaEmpresas"></ul>
+
+  <script>
+    // Mock das empresas (poderia vir de um JSON no futuro)
+    const empresas = [
+      { nome: "Barbearia Estilo Fino", id: "barbearia-estilo-fino", segmento: "barbearia" },
+      { nome: "Barbearia", id: "barbearia", segmento: "barbearia" },
+      { nome: "Belíssima", id: "belissima", segmento: "estetica" },
+      { nome: "Clean", id: "clean", segmento: "estetica" },
+      { nome: "Estética", id: "estetica", segmento: "estetica" },
+      { nome: "Petshop", id: "petshop", segmento: "petshop" },
+      { nome: "Petz", id: "petz", segmento: "petshop" },
+      { nome: "Salão de Beleza", id: "salao_de_beleza", segmento: "estetica" },
+      { nome: "Spa Glamour", id: "spa_glamour", segmento: "estetica" }
+    ];
+
+    const lista = document.getElementById('listaEmpresas');
+
+    empresas.forEach(emp => {
+      const li = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = `segmentos/${emp.segmento}/tela0.html?empresa=${emp.id}`;
+      link.textContent = emp.nome;
+      li.appendChild(link);
+      lista.appendChild(li);
+    });
+  </script>
 </body>
 </html>

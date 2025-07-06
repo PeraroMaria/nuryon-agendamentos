@@ -1,0 +1,53 @@
+{
+  "nome": "Clean Estética",
+  "descricao": "Tratamentos estéticos modernos para o seu bem-estar.",
+  "logo": "logo_clean.png",
+  "imagem": "clean_fachada.jpg",
+  "tema": "#85d1c1",
+
+  "facilidades": [
+    "Ambiente climatizado",
+    "Estacionamento gratuito",
+    "Wi-Fi disponível",
+    "Acessibilidade para cadeirantes"
+  ],
+
+  "pagamentos": [
+    "Dinheiro",
+    "Cartão de crédito",
+    "Cartão de débito",
+    "Pix"
+  ],
+
+  "endereco": "Av. das Estrelas, 987 - Bairro Luz, São Paulo - SP",
+  "telefone": "(11) 3456-7890",
+  "whatsapp": "(11) 91234-5678",
+
+  "horarios": [
+    { "dia": "Segunda a Sexta", "horas": "08:00 às 18:00" },
+    { "dia": "Sábado", "horas": "08:00 às 14:00" }
+  ],
+
+  "servicos": [
+    { "nome": "Limpeza de pele" },
+    { "nome": "Drenagem linfática" },
+    { "nome": "Depilação a laser" },
+    { "nome": "Peeling químico" }
+  ],
+
+  "footer": {
+    "col1": {
+      "titulo": "Institucional",
+      "links": ["Quem somos", "Política de privacidade"]
+    },
+    "col2": {
+      "titulo": "Serviços",
+      "links": ["Estética facial", "Corporal", "Pacotes"]
+    },
+    "col3": {
+      "titulo": "Contato",
+      "links": ["Fale conosco", "Suporte via WhatsApp"]
+    },
+    "copy": "© 2025 Clean Estética - Todos os direitos reservados."
+  }
+}

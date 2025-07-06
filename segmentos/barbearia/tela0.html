@@ -3,12 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agendamento - Nuryon</title>
-  <!-- Bootstrap -->
+  <title id="titleEmpresa">Agendamento - Nuryon</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     body {
@@ -17,15 +14,14 @@
       color: #1a1a1a;
     }
     .main-color {
-      color: #0c1f4a;
+      color: var(--bs-primary, #0c1f4a);
     }
     .bg-main {
-      background-color: #0c1f4a;
+      background-color: var(--bs-primary, #0c1f4a);
     }
-    .facility-icon, .payment-icon {
+    .facility-icon, .payment-icon, .footer-icon {
       font-size: 1.5rem;
       margin-right: 10px;
-      color: #0c1f4a;
     }
     .card-style {
       border: none;
@@ -33,7 +29,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     footer {
-      background-color: #0c1f4a;
+      background-color: var(--bs-primary, #0c1f4a);
       color: white;
       padding: 40px 0;
     }
@@ -47,11 +43,6 @@
     .footer-title {
       font-weight: bold;
       margin-bottom: 10px;
-    }
-    .footer-icon {
-      font-size: 1.5rem;
-      margin-right: 15px;
-      color: white;
     }
     .img-estabelecimento {
       width: 100%;
@@ -72,53 +63,44 @@
 <body>
   <div class="container py-5">
     <div class="text-center mb-4">
-      <img src="../../img/logo_barbearia.png" alt="Logo" width="150">
-      <h1 class="main-color mt-2">Barbearia Estilo Fino</h1>
-      <p class="lead">Especialistas em cortes masculinos. Cuidando da sua autoestima com excelência.</p>
+      <img id="logoEmpresa" src="" alt="Logo" width="150">
+      <h1 id="nomeEmpresa" class="main-color mt-2"></h1>
+      <p id="descricaoEmpresa" class="lead"></p>
     </div>
 
     <div class="row g-4">
       <div class="col-md-6">
-        <img src="../../img/estabelecimento.png" class="img-estabelecimento" alt="Foto do estabelecimento">
+        <img id="imgEstabelecimento" class="img-estabelecimento" alt="Foto do estabelecimento">
       </div>
+
       <div class="col-md-6">
         <div class="card p-4 card-style">
           <h5 class="main-color mb-3">Facilidades</h5>
-          <p><i class="fas fa-wifi facility-icon"></i>Wi-Fi</p>
-          <p><i class="fas fa-car facility-icon"></i>Estacionamento</p>
-          <p><i class="fas fa-child facility-icon"></i>Atendemos adultos e crianças</p>
-          <p><i class="fas fa-tv facility-icon"></i>TV</p>
-          <p><i class="fas fa-credit-card facility-icon"></i>Aceita cartão</p>
+          <div id="facilidadesList"></div>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="card p-4 card-style">
           <h5 class="main-color mb-3">Formas de pagamento</h5>
-          <p><i class="fab fa-cc-visa payment-icon"></i>Visa</p>
-          <p><i class="fab fa-cc-mastercard payment-icon"></i>Mastercard</p>
-          <p><i class="fab fa-cc-amex payment-icon"></i>American Express</p>
-          <p><i class="fas fa-money-bill-wave payment-icon"></i>Dinheiro</p>
-          <p><i class="fas fa-barcode payment-icon"></i>PIX</p>
+          <div id="pagamentosList"></div>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="card p-4 card-style">
           <h5 class="main-color mb-3">Localização e Contato</h5>
-          <p><i class="fas fa-map-marker-alt"></i> Rua Estilo, 123 - Centro, SP</p>
-          <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/5511999999999" target="_blank">(11) 99999-9999</a></p>
-          <p><i class="fas fa-phone"></i> (11) 3333-3333</p>
+          <p><i class="fas fa-map-marker-alt"></i> <span id="enderecoEmpresa"></span></p>
+          <p><i class="fab fa-whatsapp"></i> <a id="whatsappEmpresa" href="#" target="_blank"></a></p>
+          <p><i class="fas fa-phone"></i> <span id="telefoneEmpresa"></span></p>
           <h6 class="main-color mt-3">Horário de Funcionamento</h6>
-          <p>Seg a Sex: 09h - 20h</p>
-          <p>Sábado: 08h - 18h</p>
-          <p>Domingo: Fechado</p>
+          <div id="horariosEmpresa"></div>
         </div>
       </div>
     </div>
 
     <div class="text-center mt-5">
-      <a href="tela1.html" class="btn btn-lg bg-main text-white">Começar Agendamento</a>
+      <a id="btnAgendar" class="btn btn-lg bg-main text-white">Começar Agendamento</a>
     </div>
   </div>
 
@@ -126,29 +108,25 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <div class="footer-title">Encontre na Nuryon</div>
-          <p><a href="#">Cabelos</a> | <a href="#">Barbearia</a> | <a href="#">Sobrancelhas</a></p>
-          <p><a href="#">Unhas</a> | <a href="#">Depilação</a> | <a href="#">Estética</a></p>
+          <div class="footer-title" id="footerCol1Titulo"></div>
+          <div id="footerCol1Links"></div>
         </div>
         <div class="col-md-4">
-          <div class="footer-title">Ajuda</div>
-          <p><a href="#">Termos de uso</a></p>
-          <p><a href="#">Dúvidas frequentes</a></p>
-          <p><a href="#">Política de privacidade</a></p>
+          <div class="footer-title" id="footerCol2Titulo"></div>
+          <div id="footerCol2Links"></div>
         </div>
         <div class="col-md-4">
-          <div class="footer-title">Redes sociais</div>
-          <a href="#"><i class="fab fa-facebook footer-icon"></i></a>
-          <a href="#"><i class="fab fa-instagram footer-icon"></i></a>
+          <div class="footer-title" id="footerCol3Titulo"></div>
+          <div id="footerCol3Links"></div>
         </div>
       </div>
       <div class="text-center mt-3">
-        <small>© 2025 Nuryon. Todos os direitos reservados.</small>
+        <small id="footerCopy"></small>
       </div>
     </div>
   </footer>
 
-  <!-- Bootstrap JS -->
+  <script src="../../js/loader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

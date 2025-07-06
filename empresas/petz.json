@@ -1,0 +1,52 @@
+{
+  "nome": "Petz do Bairro",
+  "descricao": "Cuidado completo e carinho para seu pet, do banho ao veterinário.",
+  "logo": "logo_petz.png",
+  "imagem": "petz_fachada.jpg",
+  "tema": "#ffd56b",
+
+  "facilidades": [
+    "Estacionamento",
+    "Área de espera para tutores",
+    "Atendimento com hora marcada",
+    "Ambiente Pet Friendly"
+  ],
+
+  "pagamentos": [
+    "Pix",
+    "Cartão",
+    "Dinheiro",
+    "Pagamento recorrente mensal"
+  ],
+
+  "endereco": "Av. dos Animais, 789 - Bairro Pet, São Paulo - SP",
+  "telefone": "(11) 4002-8922",
+  "whatsapp": "(11) 98888-7766",
+
+  "horarios": [
+    { "dia": "Segunda a Sábado", "horas": "08:00 às 18:00" }
+  ],
+
+  "servicos": [
+    { "nome": "Banho e tosa" },
+    { "nome": "Consulta veterinária" },
+    { "nome": "Vacinação" },
+    { "nome": "Creche pet" }
+  ],
+
+  "footer": {
+    "col1": {
+      "titulo": "Serviços",
+      "links": ["Veterinária", "Banho e Tosa"]
+    },
+    "col2": {
+      "titulo": "Ajuda",
+      "links": ["Dúvidas Frequentes", "Agendamento"]
+    },
+    "col3": {
+      "titulo": "Redes Sociais",
+      "links": ["Instagram", "Facebook"]
+    },
+    "copy": "© 2025 Petz do Bairro - Cuidando com amor."
+  }
+}
