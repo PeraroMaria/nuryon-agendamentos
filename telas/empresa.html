@@ -148,14 +148,14 @@
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const segmento = urlParams.get('segmento');
+    const empresaSlug = urlParams.get('empresa');
 
     if (!segmento) {
       alert("Segmento não informado na URL. Ex: empresa.html?segmento=barbearia");
       throw new Error("Segmento ausente");
     }
 
-    fetch(`empresas/${segmento}.json`)
+    fetch(`empresas/${empresaSlug}.json`)
       .then(response => response.json())
       .then(data => {
         document.getElementById('logoEmpresa').src = data.logo;
@@ -173,7 +173,7 @@
         document.getElementById('horariosEmpresa').innerHTML = data.horarios.map(h => `<p>${h}</p>`).join('');
         document.getElementById('lista-servicos').innerHTML = data.servicos.slice(0, 3).map(s => `<li>• ${s}</li>`).join('');
 
-        document.getElementById('btnAgendamento').href = `segmentos/${segmento}/tela1.html`;
+        document.getElementById('btnAgendamento').href = `segmentos/${data.segmento}/tela1.html?empresa=${data.slug}`;
       })
       .catch(error => {
         console.error('Erro ao carregar os dados da empresa:', error);

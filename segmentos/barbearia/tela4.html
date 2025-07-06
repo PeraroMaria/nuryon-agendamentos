@@ -76,6 +76,8 @@
   </div>
 
   <script>
+    const empresaSlug = new URLSearchParams(window.location.search).get('empresa');
+
     const dados = JSON.parse(localStorage.getItem('jsonEmpresa'));
     const servicoSelecionado = localStorage.getItem('servicoSelecionado');
     document.getElementById('tituloPagina').innerText = `Profissionais para ${servicoSelecionado}`;

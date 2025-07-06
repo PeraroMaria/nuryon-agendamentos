@@ -17,11 +17,9 @@
       color: #1a1a1a;
     }
     .main-color {
-      /* será sobrescrito pelo loader se houver tema */
       color: #0c1f4a;
     }
     .bg-main {
-      /* será sobrescrito pelo loader se houver tema */
       background-color: #0c1f4a;
     }
     .facility-icon, .payment-icon {
@@ -74,64 +72,53 @@
 <body>
   <div class="container py-5">
     <div class="text-center mb-4">
-      <!-- Logo e infos carregados dinamicamente -->
-      <img id="logoEmpresa" src="" alt="Logo" width="150">
-      <h1 id="nomeEmpresa" class="main-color mt-2"></h1>
-      <p id="descricaoEmpresa" class="lead"></p>
+      <img src="../../img/logo_barbearia.png" alt="Logo" width="150">
+      <h1 class="main-color mt-2">Barbearia Estilo Fino</h1>
+      <p class="lead">Especialistas em cortes masculinos. Cuidando da sua autoestima com excelência.</p>
     </div>
 
     <div class="row g-4">
       <div class="col-md-6">
-        <!-- Imagem principal -->
-        <img id="imgEstabelecimento" src="" class="img-estabelecimento" alt="Foto do estabelecimento">
+        <img src="../../img/estabelecimento.png" class="img-estabelecimento" alt="Foto do estabelecimento">
       </div>
       <div class="col-md-6">
         <div class="card p-4 card-style">
           <h5 class="main-color mb-3">Facilidades</h5>
-          <!-- Lista dinâmica -->
-          <div id="facilidadesList">
-            <!-- Conteúdo padrão para fallback -->
-            <p><i class="fas fa-wifi facility-icon"></i>Wi-Fi</p>
-            <p><i class="fas fa-car facility-icon"></i>Estacionamento</p>
-            <p><i class="fas fa-child facility-icon"></i>Atendemos adultos e crianças</p>
-            <p><i class="fas fa-tv facility-icon"></i>TV</p>
-            <p><i class="fas fa-credit-card facility-icon"></i>Aceita cartão</p>
-          </div>
+          <p><i class="fas fa-wifi facility-icon"></i>Wi-Fi</p>
+          <p><i class="fas fa-car facility-icon"></i>Estacionamento</p>
+          <p><i class="fas fa-child facility-icon"></i>Atendemos adultos e crianças</p>
+          <p><i class="fas fa-tv facility-icon"></i>TV</p>
+          <p><i class="fas fa-credit-card facility-icon"></i>Aceita cartão</p>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="card p-4 card-style">
           <h5 class="main-color mb-3">Formas de pagamento</h5>
-          <!-- Lista dinâmica -->
-          <div id="pagamentosList">
-            <p><i class="fab fa-cc-visa payment-icon"></i>Visa</p>
-            <p><i class="fab fa-cc-mastercard payment-icon"></i>Mastercard</p>
-            <p><i class="fab fa-cc-amex payment-icon"></i>American Express</p>
-            <p><i class="fas fa-money-bill-wave payment-icon"></i>Dinheiro</p>
-            <p><i class="fas fa-barcode payment-icon"></i>PIX</p>
-          </div>
+          <p><i class="fab fa-cc-visa payment-icon"></i>Visa</p>
+          <p><i class="fab fa-cc-mastercard payment-icon"></i>Mastercard</p>
+          <p><i class="fab fa-cc-amex payment-icon"></i>American Express</p>
+          <p><i class="fas fa-money-bill-wave payment-icon"></i>Dinheiro</p>
+          <p><i class="fas fa-barcode payment-icon"></i>PIX</p>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="card p-4 card-style">
           <h5 class="main-color mb-3">Localização e Contato</h5>
-          <p><i class="fas fa-map-marker-alt"></i> <span id="enderecoEmpresa">Rua Estilo, 123 - Centro, SP</span></p>
-          <p><i class="fab fa-whatsapp"></i> <a id="whatsappEmpresa" href="#" target="_blank">(11) 99999-9999</a></p>
-          <p><i class="fas fa-phone"></i> <span id="telefoneEmpresa">(11) 3333-3333</span></p>
+          <p><i class="fas fa-map-marker-alt"></i> Rua Estilo, 123 - Centro, SP</p>
+          <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/5511999999999" target="_blank">(11) 99999-9999</a></p>
+          <p><i class="fas fa-phone"></i> (11) 3333-3333</p>
           <h6 class="main-color mt-3">Horário de Funcionamento</h6>
-          <div id="horariosEmpresa">
-            <p>Seg a Sex: 09h - 20h</p>
-            <p>Sábado: 08h - 18h</p>
-            <p>Domingo: Fechado</p>
-          </div>
+          <p>Seg a Sex: 09h - 20h</p>
+          <p>Sábado: 08h - 18h</p>
+          <p>Domingo: Fechado</p>
         </div>
       </div>
     </div>
 
     <div class="text-center mt-5">
-      <a id="btnAgendar" href="tela1.html" class="btn btn-lg bg-main text-white">Começar Agendamento</a>
+      <a href="tela1.html" class="btn btn-lg bg-main text-white">Começar Agendamento</a>
     </div>
   </div>
 
@@ -163,7 +150,5 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Loader JS (dados dinâmicos) -->
-  <script src="../../js/loader.js"></script>
 </body>
 </html>

@@ -12,7 +12,7 @@
   }
 
   // 2. Busca os dados da empresa via JSON
-  fetch(`empresas/${empresaId}.json`)
+  fetch(`/empresas/${empresaId}.json`)
     .then(response => {
       if (!response.ok) throw new Error("Empresa não encontrada.");
       return response.json();
@@ -31,42 +31,48 @@
     }
 
     // Cabeçalho
-    document.getElementById("logoEmpresa").src = `img/${dados.logo}`;
+    document.getElementById("logoEmpresa").src = `../../img/${dados.logo}`;
     document.getElementById("nomeEmpresa").innerText = dados.nome || "Sem nome";
     document.getElementById("descricaoEmpresa").innerText = dados.descricao || "";
 
     // Imagem principal
-    document.getElementById("imgEstabelecimento").src = `img/${dados.imagem}`;
+    document.getElementById("imgEstabelecimento").src = `../../img/${dados.imagem}`;
 
     // Facilidades
     const facilidades = dados.facilidades || [];
     const facilidadesEl = document.getElementById("facilidadesList");
-    facilidadesEl.innerHTML = "";
-    facilidades.forEach(item => {
-      const p = document.createElement("p");
-      p.innerHTML = `<i class="fas fa-check facility-icon"></i> ${item}`;
-      facilidadesEl.appendChild(p);
-    });
+    if (facilidadesEl) {
+      facilidadesEl.innerHTML = "";
+      facilidades.forEach(item => {
+        const p = document.createElement("p");
+        p.innerHTML = `<i class="fas fa-check facility-icon"></i> ${item}`;
+        facilidadesEl.appendChild(p);
+      });
+    }
 
     // Pagamentos
     const pagamentos = dados.pagamentos || [];
     const pagamentosEl = document.getElementById("pagamentosList");
-    pagamentosEl.innerHTML = "";
-    pagamentos.forEach(item => {
-      const p = document.createElement("p");
-      p.innerHTML = `<i class="fas fa-credit-card payment-icon"></i> ${item}`;
-      pagamentosEl.appendChild(p);
-    });
+    if (pagamentosEl) {
+      pagamentosEl.innerHTML = "";
+      pagamentos.forEach(item => {
+        const p = document.createElement("p");
+        p.innerHTML = `<i class="fas fa-credit-card payment-icon"></i> ${item}`;
+        pagamentosEl.appendChild(p);
+      });
+    }
 
-    // Serviços em destaque
+    // Serviços em destaque (opcional)
     const servicos = dados.servicos || [];
     const servicosEl = document.getElementById("lista-servicos");
-    servicosEl.innerHTML = "";
-    servicos.slice(0, 4).forEach(servico => {
-      const li = document.createElement("li");
-      li.innerText = `• ${servico.nome || servico}`;
-      servicosEl.appendChild(li);
-    });
+    if (servicosEl) {
+      servicosEl.innerHTML = "";
+      servicos.slice(0, 4).forEach(servico => {
+        const li = document.createElement("li");
+        li.innerText = `• ${servico.nome || servico}`;
+        servicosEl.appendChild(li);
+      });
+    }
 
     // Endereço e Contatos
     document.getElementById("enderecoEmpresa").innerText = dados.endereco || "-";
@@ -79,19 +85,25 @@
     // Horários de funcionamento
     const horarios = dados.horarios || [];
     const horariosEl = document.getElementById("horariosEmpresa");
-    horariosEl.innerHTML = "";
-    horarios.forEach(item => {
-      const p = document.createElement("p");
-      if (typeof item === "string") {
-        p.innerText = item;
-      } else {
-        p.innerText = `${item.dia || ""}: ${item.horas || ""}`;
-      }
-      horariosEl.appendChild(p);
-    });
+    if (horariosEl) {
+      horariosEl.innerHTML = "";
+      horarios.forEach(item => {
+        const p = document.createElement("p");
+        if (typeof item === "string") {
+          p.innerText = item;
+        } else {
+          p.innerText = `${item.dia || ""}: ${item.horas || ""}`;
+        }
+        horariosEl.appendChild(p);
+      });
+    }
 
     // Salva o JSON completo no localStorage para uso nas próximas telas
     localStorage.setItem("jsonEmpresa", JSON.stringify(dados));
+
+    // Redireciona com o parâmetro da empresa
+    const btn = document.getElementById("btnAgendar");
+    if (btn) btn.href = `tela1.html?empresa=${empresaId}`;
   }
 
   // 4. Função auxiliar para formatar o número do WhatsApp

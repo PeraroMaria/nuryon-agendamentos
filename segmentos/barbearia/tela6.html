@@ -90,6 +90,8 @@
   </div>
 
   <script>
+    const empresaSlug = new URLSearchParams(window.location.search).get('empresa');
+
     const empresa = JSON.parse(localStorage.getItem('jsonEmpresa') || '{}');
     document.getElementById('empresaNome').innerText = empresa?.nome || '';
 

@@ -60,6 +60,8 @@
   </div>
 
   <script>
+    const empresaSlug = new URLSearchParams(window.location.search).get('empresa');
+
     const params = new URLSearchParams(window.location.search);
     const empresa = params.get("empresa");
 

@@ -32,6 +32,8 @@
   </div>
 
   <script>
+    const empresaSlug = new URLSearchParams(window.location.search).get('empresa');
+
   document.getElementById('nome').value = localStorage.getItem('clienteNome') || '';
   document.getElementById('email').value = localStorage.getItem('clienteEmail') || '';
   document.getElementById('telefone').value = localStorage.getItem('clienteTelefone') || '';
@@ -45,7 +47,7 @@
       // segue para a próxima etapa
       const params = new URLSearchParams(window.location.search);
       const empresa = params.get("empresa");
-      window.location.href = `tela2.html?empresa=${empresa}`;
+      window.location.href = `tela2.html?empresa=${empresaSlug}`;
 
     });
   </script>
