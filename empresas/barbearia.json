@@ -1,57 +1,123 @@
 {
-  "slug": "barbearia",
-  "segmento": "barbearia",
-  "nome": "Barbearia Estilo Fino",
-  "descricao": "Especialistas em cortes masculinos.",
-  "logo": "barbearia.png",
-  "imagem": "foto_barbearia.jpg",
-  "tema": "#0c1f4a",
-  "whatsapp": "5511999999999",
-  "telefone": "11 99999-9999",
-  "endereco": "Rua das Navalhas, 123 - Centro, São Paulo - SP",
+  "nome": "Barbearia Da Cidade",
+  "descricao": "Especialistas em cortes masculinos. Cuidando da sua autoestima com excelência.",
+  "logo": "logo_barbearia.png",
+  "imagem": "estabelecimento.png",
+  "tema": "#191970",
 
   "facilidades": [
-    "Wi-Fi gratuito",
-    "Ar-condicionado",
-    "Estacionamento no local"
+    "Wi-Fi",
+    "Estacionamento",
+    "Atendemos adultos e crianças",
+    "TV",
+    "Aceita cartão"
   ],
 
   "pagamentos": [
-    "Cartão de crédito",
-    "Pix",
-    "Dinheiro"
+    "PIX",
+    "Cartão de Crédito",
+    "Dinheiro",
+    "Visa",
+    "Mastercard"
   ],
 
+  "endereco": "Av. das Estrelas, 987 - Bairro Luz, São Paulo - SP",
+  "telefone": "(11) 3456-7890",
+  "whatsapp": "(11) 91234-5678",
+
   "horarios": [
-    { "dia": "Segunda a Sexta", "horas": "09h às 20h" },
-    { "dia": "Sábado", "horas": "09h às 18h" }
+    { "dia": "Seg a Sex", "horas": "09h - 20h" },
+    { "dia": "Sábado", "horas": "08h - 18h" },
+    { "dia": "Domingo", "horas": "Fechado" }
   ],
 
   "servicos": [
-    { "categoria": "Cabelos", "nome": "Corte masculino", "preco": 40 },
-    { "categoria": "Barba", "nome": "Barba premium", "preco": 35 }
+    { "nome": "Corte Masculino", "preco": 70, "duracao": 40 },
+    { "nome": "Corte Infantil", "preco": 70, "duracao": 40 },
+    { "nome": "Cabelo + Barba + Sobrancelha", "preco": 140, "duracao": 60 },
+    { "nome": "Combo (Cabelo e Barba)", "preco": 120, "duracao": 60 },
+    { "nome": "Acabamento | Pezinho", "preco": 30, "duracao": 10 },
+    { "nome": "Escova Modeladora", "preco": 30, "duracao": 15 },
+    { "nome": "Corte + Barba + Coloração de Cabelo", "preco": 260, "duracao": 90 },
+    { "nome": "Barba", "preco": 70, "duracao": 30 },
+    { "nome": "Barba + Pezinho", "preco": 90, "duracao": 40 },
+    { "nome": "Barba + Sobrancelha Navalhada", "preco": 90, "duracao": 40 },
+    { "nome": "Barboterapia", "preco": 120, "duracao": 40 },
+    { "nome": "Pigmentação", "preco": 70, "duracao": 50 },
+    { "nome": "Preenchimento de Barba", "preco": 899, "duracao": 80 },
+    { "nome": "Botox Capilar", "preco": 180, "duracao": 120 },
+    { "nome": "Luzes", "preco": 250, "duracao": 120 },
+    { "nome": "Platinado", "preco": 300, "duracao": 180 },
+    { "nome": "Progressiva", "preco": 180, "duracao": 120 },
+    { "nome": "Selagem", "preco": 180, "duracao": 120 },
+    { "nome": "Corte + Depilação Express Nariz", "preco": 100, "duracao": 50 },
+    { "nome": "Corte + Depilação Express Nariz + Orelha", "preco": 130, "duracao": 60 },
+    { "nome": "Corte + Depilação Express Orelha", "preco": 100, "duracao": 50 },
+    { "nome": "Drenagem Linfática", "preco": 139.90, "duracao": 50 },
+    { "nome": "Massagem Capilar", "preco": 30, "duracao": 7 },
+    { "nome": "Massagem Capilar com Hidratação", "preco": 50, "duracao": 20 },
+    { "nome": "Massagem Relaxante Terapêutica", "preco": 139.90, "duracao": 50 },
+    { "nome": "Limpeza de Pele com Máscara Preta + Ozônio", "preco": 100, "duracao": 60 },
+    { "nome": "Limpeza de Pele com Ozonioterapia", "preco": 80, "duracao": 20 },
+    { "nome": "Máscara Preta", "preco": 40, "duracao": 30 },
+    { "nome": "Depilação Express Nariz", "preco": 30, "duracao": 20 },
+    { "nome": "Depilação Express Orelha", "preco": 30, "duracao": 20 },
+    { "nome": "Design Simétrico de Sobrancelha", "preco": 40, "duracao": 25 },
+    { "nome": "Sobrancelha na Navalha", "preco": 20, "duracao": 10 },
+    { "nome": "Penteado", "preco": 40, "duracao": 10 }
   ],
 
   "profissionais": [
     {
-      "nome": "João",
-      "foto": "joao.jpg",
-      "servicos": ["Corte masculino"],
-      "agenda": {
-        "2025-06-30": ["09:00", "09:30", "10:00", "10:30", "14:00", "14:30", "15:00"],
-        "2025-07-01": ["10:00", "10:30", "11:00", "11:30", "13:00", "13:30", "14:00"],
-        "2025-07-02": ["09:00", "09:30", "11:00", "11:30", "15:00", "15:30", "16:00"]
-      }
+      "id": "prof01",
+      "nome": "João Silva",
+      "foto": "joao.png",
+      "servicos": ["Corte Masculino", "Corte Infantil", "Combo (Cabelo e Barba)", "Corte + Depilação Express Orelha"]
     },
     {
-      "nome": "Rafa",
-      "foto": "rafa.jpg",
-      "servicos": ["Barba premium"],
-      "agenda": {
-        "2025-06-30": ["09:15", "09:45", "10:15", "10:45", "15:15", "15:45"],
-        "2025-07-01": ["09:00", "09:30", "13:00", "13:30", "14:00"],
-        "2025-07-02": ["10:00", "10:30", "11:00", "11:30", "16:00", "16:30"]
-      }
+      "id": "prof02",
+      "nome": "Carlos Souza",
+      "foto": "carlos.png",
+      "servicos": ["Barba", "Barba + Sobrancelha Navalhada", "Design Simétrico de Sobrancelha", "Pigmentação"]
+    },
+    {
+      "id": "prof03",
+      "nome": "Mateus Oliveira",
+      "foto": "mateus.png",
+      "servicos": ["Botox Capilar", "Platinado", "Progressiva", "Selagem", "Luzes"]
+    },
+    {
+      "id": "prof04",
+      "nome": "Fernanda Lima",
+      "foto": "fernanda.png",
+      "servicos": ["Drenagem Linfática", "Massagem Relaxante Terapêutica", "Limpeza de Pele com Máscara Preta + Ozônio", "Máscara Preta"]
+    },
+    {
+      "id": "prof05",
+      "nome": "Lucas Pereira",
+      "foto": "lucas.png",
+      "servicos": ["Corte + Barba + Coloração de Cabelo", "Preenchimento de Barba", "Penteado", "Cabelo + Barba + Sobrancelha"]
     }
-  ]
+  ],
+
+  "btn_agendamento": {
+    "texto": "Começar Agendamento",
+    "link": "tela1.html"
+  },
+
+  "footer": {
+    "col1": {
+      "titulo": "Institucional",
+      "links": ["Quem somos", "Política de privacidade"]
+    },
+    "col2": {
+      "titulo": "Serviços",
+      "links": ["Cortes Cabelo", "Depilação", "Pacotes"]
+    },
+    "col3": {
+      "titulo": "Contato",
+      "links": ["Fale conosco", "Suporte via WhatsApp"]
+    },
+    "copy": "© 2025 Barbearia Estilo Fino - Todos os direitos reservados."
+  }
 }

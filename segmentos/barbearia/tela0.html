@@ -3,68 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="titleEmpresa">Agendamento - Nuryon</title>
+  <title id="titleEmpresa">Agendamento - <span id="empresaTitulo">Empresa</span></title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <style>
+  <style id="styleEmpresa">
+    :root {
+      --cor-tema: #c79e50;
+    }
+
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: #f7f9fc;
-      color: #1a1a1a;
+      background-color: #0d0d0d;
+      color: #f2f2f2;
     }
+
+    h1, h5, h6 {
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
     .main-color {
-      color: var(--bs-primary, #0c1f4a);
+      color: var(--cor-tema);
     }
+
     .bg-main {
-      background-color: var(--bs-primary, #0c1f4a);
+      background-color: var(--cor-tema);
     }
-    .facility-icon, .payment-icon, .footer-icon {
-      font-size: 1.5rem;
-      margin-right: 10px;
-    }
+
     .card-style {
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      background: linear-gradient(145deg, #1c1c1c, #101010);
+      color: #f2f2f2;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 12px rgba(199, 158, 80, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      height: 100%;
     }
-    footer {
-      background-color: var(--bs-primary, #0c1f4a);
-      color: white;
-      padding: 40px 0;
+    .card-style:hover {
+      transform: scale(1.02);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 15px rgba(199, 158, 80, 0.2);
     }
-    footer a {
-      color: #ffffff;
-      text-decoration: none;
-    }
-    footer a:hover {
-      text-decoration: underline;
-    }
-    .footer-title {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+
     .img-estabelecimento {
       width: 100%;
       height: 100%;
-      max-height: 350px;
+      max-height: 360px;
       object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      display: block;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.6);
     }
-    @media (max-width: 767px) {
-      .img-estabelecimento {
-        max-height: 250px;
-      }
+
+    .btn-agendar {
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      padding: 0.75rem 2rem;
+      border: 2px solid var(--cor-tema);
+      background-color: transparent;
+      color: var(--cor-tema);
+      transition: all 0.3s ease;
+    }
+    .btn-agendar:hover {
+      background-color: var(--cor-tema);
+      color: #0d0d0d;
+      box-shadow: 0 0 10px var(--cor-tema);
+      transform: scale(1.03);
+    }
+
+    footer {
+      background-color: #000;
+      color: white;
+      padding: 40px 0;
+    }
+    .footer-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+    .footer-link {
+      color: #aaa;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .footer-link:hover {
+      color: var(--cor-tema);
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="container py-5">
-    <div class="text-center mb-4">
-      <img id="logoEmpresa" src="" alt="Logo" width="150">
-      <h1 id="nomeEmpresa" class="main-color mt-2"></h1>
+    <div class="text-center mb-5">
+      <img id="logoEmpresa" src="" alt="Logo" width="160">
+      <h1 id="nomeEmpresa" class="main-color mt-3"></h1>
       <p id="descricaoEmpresa" class="lead"></p>
     </div>
 
@@ -73,34 +106,34 @@
         <img id="imgEstabelecimento" class="img-estabelecimento" alt="Foto do estabelecimento">
       </div>
 
-      <div class="col-md-6">
-        <div class="card p-4 card-style">
-          <h5 class="main-color mb-3">Facilidades</h5>
+      <div class="col-md-6 d-flex">
+        <div class="card p-4 card-style w-100">
+          <h5 class="main-color mb-3" id="tituloFacilidades">Facilidades</h5>
           <div id="facilidadesList"></div>
         </div>
       </div>
 
-      <div class="col-md-6">
-        <div class="card p-4 card-style">
-          <h5 class="main-color mb-3">Formas de pagamento</h5>
+      <div class="col-md-6 d-flex">
+        <div class="card p-4 card-style w-100">
+          <h5 class="main-color mb-3" id="tituloPagamentos">Formas de pagamento</h5>
           <div id="pagamentosList"></div>
         </div>
       </div>
 
-      <div class="col-md-6">
-        <div class="card p-4 card-style">
-          <h5 class="main-color mb-3">Localização e Contato</h5>
+      <div class="col-md-6 d-flex">
+        <div class="card p-4 card-style w-100">
+          <h5 class="main-color mb-3" id="tituloContato">Localização e Contato</h5>
           <p><i class="fas fa-map-marker-alt"></i> <span id="enderecoEmpresa"></span></p>
           <p><i class="fab fa-whatsapp"></i> <a id="whatsappEmpresa" href="#" target="_blank"></a></p>
           <p><i class="fas fa-phone"></i> <span id="telefoneEmpresa"></span></p>
-          <h6 class="main-color mt-3">Horário de Funcionamento</h6>
+          <h6 class="main-color mt-3" id="tituloHorario">Horário de Funcionamento</h6>
           <div id="horariosEmpresa"></div>
         </div>
       </div>
     </div>
 
     <div class="text-center mt-5">
-      <a id="btnAgendar" class="btn btn-lg bg-main text-white">Começar Agendamento</a>
+      <a id="btnAgendar" class="btn btn-agendar" href="#">Começar Agendamento</a>
     </div>
   </div>
 
@@ -120,13 +153,37 @@
           <div id="footerCol3Links"></div>
         </div>
       </div>
-      <div class="text-center mt-3">
+      <div class="text-center mt-4">
         <small id="footerCopy"></small>
       </div>
     </div>
   </footer>
+<script>
+  const empresa = new URLSearchParams(window.location.search).get("empresa");
+
+  if (!empresa) {
+    alert("Empresa não especificada.");
+    throw new Error("Parâmetro 'empresa' ausente na URL.");
+  }
+
+  const dadosBrutos = localStorage.getItem(empresa);
+
+  if (!dadosBrutos) {
+    alert("Erro ao carregar os dados da empresa. Tente novamente.");
+    throw new Error(`JSON da empresa '${empresa}' não encontrado no localStorage.`);
+  }
+
+  const dados = JSON.parse(dadosBrutos);
+
+  // ✅ Aplicar cor do tema
+  if (dados.tema) {
+    document.documentElement.style.setProperty('--cor-tema', dados.tema);
+  }
+</script>
 
   <script src="../../js/loader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
 </body>
 </html>

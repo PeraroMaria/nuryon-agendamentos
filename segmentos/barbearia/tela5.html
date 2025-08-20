@@ -2,161 +2,109 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Agendar Data e Horário - Nuryon</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resumo do Agendamento</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/estilo.css">
   <style>
+    :root {
+      --cor-tema: #85d1c1;
+    }
+
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: #f7f9fc;
-      color: #0c1f4a;
+      background: linear-gradient(to bottom, #101010, #1a1a1a);
+      color: #fff;
+      margin: 0;
+      padding: 2rem 1rem;
     }
-    .date-button, .time-button {
-      border: 2px solid #0c1f4a;
-      background-color: white;
-      border-radius: 8px;
-      padding: 10px 15px;
-      margin: 5px;
-      cursor: pointer;
-      transition: all 0.2s ease-in-out;
-      font-weight: 500;
-      color: #0c1f4a;
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #1f1f1f;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
-    .date-button:hover, .time-button:hover {
-      background-color: #e8f0ff;
+
+    h1 {
+      color: var(--cor-tema);
+      text-align: center;
+      margin-bottom: 0.5rem;
     }
-    .selected {
-      background-color: #0c1f4a !important;
-      color: white !important;
-      font-weight: 600;
+
+    p.subtitulo {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #ccc;
     }
-    .btn-next {
-      background-color: #0c1f4a;
-      color: white;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 8px;
-      border: none;
+
+    .resumo-item {
+      margin-bottom: 1rem;
     }
-    .btn-next:hover {
-      background-color: #0a193a;
+
+    .resumo-item span {
+      font-weight: bold;
+      color: var(--cor-tema);
     }
-    .horario-section {
-      margin-bottom: 20px;
-    }
-    .horario-titulo {
+
+    .botao-confirmar {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 1rem 2rem;
       font-size: 1.1rem;
-      margin: 10px 0;
-      font-weight: 600;
-      color: #0c1f4a;
+      background-color: transparent;
+      border: 2px solid var(--cor-tema);
+      color: var(--cor-tema);
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .botao-confirmar:hover {
+      background-color: var(--cor-tema);
+      color: #000;
     }
   </style>
 </head>
 <body>
-  <div class="container py-5">
-    <div class="text-center mb-4">
-      <h2 class="fw-bold">Escolha o seu horário</h2>
-      <p class="text-muted">Selecione a data e o horário desejado para o atendimento</p>
-    </div>
+  <div class="container">
+    <h1>Resumo do Agendamento</h1>
+    <p class="subtitulo">Confira todas as informações antes de confirmar</p>
 
-    <div class="text-center mb-4">
-      <div id="datas" class="d-flex flex-wrap justify-content-center"></div>
-    </div>
+    <div class="resumo-item">Nome: <span id="resumoNome"></span></div>
+    <div class="resumo-item">E-mail: <span id="resumoEmail"></span></div>
+    <div class="resumo-item">Telefone: <span id="resumoTelefone"></span></div>
+    <div class="resumo-item">Serviço: <span id="resumoServico"></span></div>
+    <div class="resumo-item">Profissional: <span id="resumoProfissional"></span></div>
+    <div class="resumo-item">Data: <span id="resumoData"></span></div>
+    <div class="resumo-item">Horário: <span id="resumoHorario"></span></div>
 
-    <div class="horario-section">
-      <div class="horario-titulo">Manhã</div>
-      <div id="manha" class="d-flex flex-wrap"></div>
-    </div>
-    <div class="horario-section">
-      <div class="horario-titulo">Tarde</div>
-      <div id="tarde" class="d-flex flex-wrap"></div>
-    </div>
-    <div class="horario-section">
-      <div class="horario-titulo">Noite</div>
-      <div id="noite" class="d-flex flex-wrap"></div>
-    </div>
-
-    <div class="text-center mt-4">
-      <button class="btn-next" id="btnConfirmar" disabled onclick="confirmarAgendamento()">Confirmar Agendamento</button>
-    </div>
+    <button class="botao-confirmar" onclick="confirmarAgendamento()">Confirmar Agendamento</button>
   </div>
 
-  <script>
-    const empresaSlug = new URLSearchParams(window.location.search).get('empresa');
+<script>
+  const resumo = JSON.parse(localStorage.getItem("resumoAgendamento")) || {};
 
-    const dados = JSON.parse(localStorage.getItem('jsonEmpresa'));
-    const profissional = localStorage.getItem('profissionalSelecionado');
-    const prof = dados.profissionais.find(p => p.nome === profissional);
+  document.getElementById("resumoNome").innerText = resumo.nome || "-";
+  document.getElementById("resumoEmail").innerText = resumo.email || "-";
+  document.getElementById("resumoTelefone").innerText = resumo.telefone || "-";
+  document.getElementById("resumoServico").innerText = resumo.servico || "-";
+  document.getElementById("resumoProfissional").innerText = resumo.profissional || "-";
+  document.getElementById("resumoData").innerText = resumo.data || "-";
+  document.getElementById("resumoHorario").innerText = resumo.hora || "-";
 
-    const agenda = prof?.agenda || {};
-    const datasDisponiveis = Object.keys(agenda);
+  function confirmarAgendamento() {
+    alert("Agendamento confirmado com sucesso!");
 
-    let dataSelecionada = null;
-    let horarioSelecionado = null;
+    //  Futuro: redirecionar para WhatsApp ou página de sucesso
+    setTimeout(() => {
+      localStorage.clear();
+      window.location.href = `../tela0.html?empresa=${empresaSlug}`;
+ // Retorna à tela inicial
+    }, 700);
+  }
+</script>
 
-    const datasDiv = document.getElementById('datas');
-    const manhaDiv = document.getElementById('manha');
-    const tardeDiv = document.getElementById('tarde');
-    const noiteDiv = document.getElementById('noite');
-
-    datasDisponiveis.forEach(data => {
-      const btn = document.createElement('button');
-      btn.className = 'date-button';
-      btn.innerText = new Date(data).toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: '2-digit' });
-      btn.onclick = () => selecionarData(btn, data);
-      datasDiv.appendChild(btn);
-    });
-
-    function criarBotaoHorario(hora, container) {
-      const btn = document.createElement('button');
-      btn.className = 'time-button';
-      btn.innerText = hora;
-      btn.onclick = () => selecionarHorario(btn, hora);
-      container.appendChild(btn);
-    }
-
-    function selecionarData(botao, valor) {
-      document.querySelectorAll('.date-button').forEach(b => b.classList.remove('selected'));
-      botao.classList.add('selected');
-      dataSelecionada = valor;
-
-      // Limpa horários anteriores
-      manhaDiv.innerHTML = '';
-      tardeDiv.innerHTML = '';
-      noiteDiv.innerHTML = '';
-
-      const horariosDoDia = agenda[valor] || [];
-
-      horariosDoDia.forEach(hora => {
-        const [h] = hora.split(':');
-        const intH = parseInt(h);
-
-        if (intH >= 9 && intH < 12) criarBotaoHorario(hora, manhaDiv);
-        else if (intH >= 12 && intH < 18) criarBotaoHorario(hora, tardeDiv);
-        else criarBotaoHorario(hora, noiteDiv);
-      });
-
-      ativarBotaoConfirmar();
-    }
-
-    function selecionarHorario(botao, valor) {
-      document.querySelectorAll('.time-button').forEach(b => b.classList.remove('selected'));
-      botao.classList.add('selected');
-      horarioSelecionado = valor;
-      ativarBotaoConfirmar();
-    }
-
-    function ativarBotaoConfirmar() {
-      const btn = document.getElementById('btnConfirmar');
-      btn.disabled = !(dataSelecionada && horarioSelecionado);
-    }
-
-    function confirmarAgendamento() {
-      localStorage.setItem('dataSelecionada', dataSelecionada);
-      localStorage.setItem('horarioSelecionado', horarioSelecionado);
-      window.location.href = 'tela6.html';
-    }
-  </script>
 </body>
 </html>

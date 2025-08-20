@@ -1,113 +1,190 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Selecione o Serviço - Nuryon</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Escolha o Profissional - Nuryon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --cor-tema: #c79e50;
+    }
+
     body {
+      margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background-color: #f7f9fc;
-      color: #0c1f4a;
+      background: linear-gradient(to bottom, #101010, #1a1a1a);
+      color: #fff;
     }
-    .service-card {
-      border-radius: 12px;
-      padding: 20px;
-      background-color: white;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-      transition: transform 0.2s;
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--cor-tema);
+      margin-bottom: 0.5rem;
+    }
+
+    p.sub {
+      font-size: 1.05rem;
+      color: #bbb;
+      margin-bottom: 2.5rem;
+    }
+
+    .profissionais {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background-color: #121212;
+      border: 2px solid #2a2a2a;
+      border-radius: 18px;
+      padding: 1.2rem;
+      width: 220px;
       cursor: pointer;
+      transition: 0.3s ease-in-out;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      text-align: center;
     }
-    .service-card:hover {
-      transform: translateY(-5px);
-      background-color: #e8f0ff;
+
+    .card:hover {
+      border-color: var(--cor-tema);
+      background-color: #1c1c1c;
     }
-    .btn-next {
-      background-color: #0c1f4a;
-      color: white;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 8px;
-      border: none;
+
+    .card.selecionado {
+      border-color: var(--cor-tema);
+      box-shadow: 0 0 12px var(--cor-tema);
+      font-weight: bold;
     }
-    .btn-next:hover {
-      background-color: #0a193a;
+
+    .card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 10px;
     }
-    .service-title {
+
+    .card .nome {
       font-size: 1.1rem;
-      font-weight: 600;
+      color: var(--cor-tema);
+      margin-bottom: 4px;
     }
-    .service-desc {
-      font-size: 0.9rem;
-      color: #666;
+
+    .card .desc {
+      font-size: 0.95rem;
+      color: #ccc;
     }
+
+    .btn {
+      margin-top: 3rem;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--cor-tema);
+      border: 2px solid var(--cor-tema);
+      border-radius: 50px;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .btn:hover:not(:disabled) {
+      background-color: var(--cor-tema);
+      color: #000;
+    }
+
   </style>
 </head>
 <body>
-  <div class="container py-5">
-    <div class="text-center mb-4">
-      <h2 class="fw-bold" id="categoriaTitulo">Escolha um serviço</h2>
-      <p class="text-muted">Selecione o serviço desejado da categoria escolhida</p>
+  <div class="container">
+    <h1 id="titulo">Escolha o profissional</h1>
+    <p class="sub">Selecione quem vai realizar o atendimento</p>
+
+    <div class="profissionais" id="profissionaisContainer">
+      <!-- Cards serão adicionados aqui -->
     </div>
 
-    <div class="row g-4" id="servicoContainer"></div>
-
-    <div class="text-center mt-5">
-      <button class="btn-next" disabled id="nextButton" onclick="irParaProfissionais()">Avançar</button>
-    </div>
+    <button class="btn" disabled id="nextButton">Avançar</button>
   </div>
 
   <script>
-    const empresaSlug = new URLSearchParams(window.location.search).get('empresa');
+document.addEventListener('DOMContentLoaded', function () {
+  const empresa = new URLSearchParams(window.location.search).get("empresa");
+  const dadosBrutos = localStorage.getItem(empresa);
+  const servicoSelecionado = JSON.parse(localStorage.getItem('servicoSelecionado'));
 
-    const params = new URLSearchParams(window.location.search);
-    const empresa = params.get("empresa");
+  if (!empresa || !dadosBrutos || !servicoSelecionado) {
+    alert("Erro ao carregar os dados. Retorne à tela inicial.");
+    window.location.href = "tela1.html";
+    throw new Error("Dados ausentes");
+  }
 
-    const categoria = localStorage.getItem('categoriaSelecionada');
-    document.getElementById('categoriaTitulo').innerText = `Serviços de ${categoria}`;
+  const dados = JSON.parse(dadosBrutos);
+  if (dados.tema) {
+    document.documentElement.style.setProperty('--cor-tema', dados.tema);
+  }
 
-    const container = document.getElementById('servicoContainer');
-    const dados = JSON.parse(localStorage.getItem("jsonEmpresa"));
-    const lista = dados.servicos.filter(s => s.categoria === categoria);
+  const profissionais = dados.profissionais || [];
+  const container = document.getElementById("profissionaisContainer");
+  const btnNext = document.getElementById("nextButton");
 
-    let servicoSelecionado = "";
+  document.getElementById("titulo").innerText = `Profissionais para ${servicoSelecionado.nome}`;
 
-    lista.forEach(servico => {
-      const col = document.createElement('div');
-      col.className = 'col-md-4';
+  let selecionado = null;
 
-      const card = document.createElement('div');
-      card.className = 'service-card';
-      card.innerHTML = `
-        <div class="service-title">${servico.nome}</div>
-        <div class="service-desc">
-          Duração: ${servico.duracao || '30'}min<br>
-          Preço: R$ ${Number(servico.preco).toFixed(2).replace('.', ',')}
-        </div>
+  profissionais
+    .filter(p => p.servicos.includes(servicoSelecionado.nome))
+    .forEach(p => {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.innerHTML = `
+        <img src="../../imagens/${empresa}/${p.foto}" alt="${p.nome}">
+        <div class="nome">${p.nome}</div>
+        <div class="desc">Especialista</div>
       `;
-      card.onclick = () => selecionar(card, servico.nome);
-
-      col.appendChild(card);
-      container.appendChild(col);
+      div.onclick = () => selecionarProfissional(div, p.nome);
+      container.appendChild(div);
     });
 
-    function selecionar(el, nome) {
-      document.querySelectorAll('.service-card').forEach(card => {
-        card.style.border = 'none';
-        card.style.fontWeight = 'normal';
-      });
-      el.style.border = '2px solid #0c1f4a';
-      el.style.fontWeight = '600';
-      servicoSelecionado = nome;
-      document.getElementById('nextButton').disabled = false;
-      localStorage.setItem('servicoSelecionado', nome);
-    }
+  // Adiciona opção "Não tenho preferência"
+  const divPreferencia = document.createElement("div");
+  divPreferencia.className = "card";
+  divPreferencia.innerHTML = `
+    <img src="../../imagens/${empresa}/sem-preferencia.png" alt="Sem preferência">
+    <div class="nome">Não tenho preferência</div>
+    <div class="desc">Qualquer profissional disponível</div>
+  `;
+  divPreferencia.onclick = () => selecionarProfissional(divPreferencia, "Sem preferência");
+  container.appendChild(divPreferencia);
 
-    function irParaProfissionais() {
-      window.location.href = `tela4.html?empresa=${empresa}`;
-    }
-  </script>
+  function selecionarProfissional(el, nome) {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove("selecionado"));
+    el.classList.add("selecionado");
+    localStorage.setItem("profissionalSelecionado", nome);
+    btnNext.disabled = false;
+  }
+
+  btnNext.onclick = () => {
+    window.location.href = `tela4.html?empresa=${empresa}`;
+  };
+});
+</script>
+
 </body>
 </html>

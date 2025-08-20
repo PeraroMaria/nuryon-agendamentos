@@ -128,5 +128,82 @@
 
   <script src="../../js/loader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const empresaID = params.get("empresa");
+
+  if (!empresaID) {
+    alert("Empresa não identificada.");
+  } else {
+    fetch(`../../empresas/${empresaID}.json`)
+      .then(response => response.json())
+      .then(data => {
+        // Identidade visual
+        document.getElementById("logoEmpresa").src = `../../img/${data.logo}`;
+        document.getElementById("nomeEmpresa").textContent = data.nome;
+        document.getElementById("titleEmpresa").textContent = `Agendamento - ${data.nome}`;
+        document.body.style.setProperty('--bs-primary', data.cor_principal || "#0c1f4a");
+
+        // Descrição
+        document.getElementById("descricaoEmpresa").textContent = data.descricao || "";
+
+        // Imagem de capa
+        if (data.imagem_estabelecimento) {
+          document.getElementById("imgEstabelecimento").src = `../../img/${data.imagem_estabelecimento}`;
+        }
+
+        // Facilidades
+        const facilidadesList = document.getElementById("facilidadesList");
+        if (data.facilidades) {
+          data.facilidades.forEach(item => {
+            facilidadesList.innerHTML += `<p><i class="fas fa-check-circle facility-icon"></i> ${item}</p>`;
+          });
+        }
+
+        // Pagamentos
+        const pagamentosList = document.getElementById("pagamentosList");
+        if (data.pagamentos) {
+          data.pagamentos.forEach(item => {
+            pagamentosList.innerHTML += `<p><i class="fas fa-credit-card payment-icon"></i> ${item}</p>`;
+          });
+        }
+
+        // Contato e localização
+        document.getElementById("enderecoEmpresa").textContent = data.endereco || "";
+        document.getElementById("telefoneEmpresa").textContent = data.telefone || "";
+
+        const whatsappLink = `https://wa.me/${data.whatsapp}?text=Olá,%20gostaria%20de%20agendar%20um%20horário.`;
+        const whatsappAnchor = document.getElementById("whatsappEmpresa");
+        whatsappAnchor.href = whatsappLink;
+        whatsappAnchor.textContent = `WhatsApp: ${data.whatsapp}`;
+
+        // Horários
+        const horarios = document.getElementById("horariosEmpresa");
+        if (data.horarios) {
+          horarios.innerHTML = data.horarios.map(h => `<p>${h}</p>`).join('');
+        }
+
+        // Botão de agendamento (leva para tela 1)
+        document.getElementById("btnAgendar").href = `tela1.html?empresa=${empresaID}`;
+
+        // Rodapé (opcional, se estiver no JSON)
+        if (data.footer) {
+          document.getElementById("footerCol1Titulo").textContent = data.footer.col1?.titulo || "";
+          document.getElementById("footerCol2Titulo").textContent = data.footer.col2?.titulo || "";
+          document.getElementById("footerCol3Titulo").textContent = data.footer.col3?.titulo || "";
+          
+          document.getElementById("footerCol1Links").innerHTML = (data.footer.col1?.links || []).map(l => `<p>${l}</p>`).join('');
+          document.getElementById("footerCol2Links").innerHTML = (data.footer.col2?.links || []).map(l => `<p>${l}</p>`).join('');
+          document.getElementById("footerCol3Links").innerHTML = (data.footer.col3?.links || []).map(l => `<p>${l}</p>`).join('');
+          
+          document.getElementById("footerCopy").textContent = data.footer.copy || "";
+        }
+      })
+      .catch(error => {
+        console.error("Erro ao carregar os dados da empresa:", error);
+        alert("Não foi possível carregar os dados da empresa.");
+      });
+  }
+</script>
 </body>
 </html>

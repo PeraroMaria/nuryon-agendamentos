@@ -3,14 +3,79 @@
   "descricao": "Especialistas em cortes masculinos. Cuidando da sua autoestima com excelência.",
   "logo": "logo_barbearia.png",
   "imagem": "estabelecimento.png",
-  "facilidades": ["Wi-Fi", "Estacionamento", "Atendemos adultos e crianças", "TV", "Aceita cartão"],
-  "pagamentos": ["PIX", "Cartão de Crédito", "Dinheiro", "Visa", "Mastercard"],
-  "endereco": "Rua Estilo, 123 - Centro, SP",
-  "telefone": "(11) 3333-3333",
-  "whatsapp": "11999999999",
+  "tema": "#85d1c1",
+
+  "facilidades": [
+    "Wi-Fi",
+    "Estacionamento",
+    "Atendemos adultos e crianças",
+    "TV",
+    "Aceita cartão"
+  ],
+
+  "pagamentos": [
+    "PIX",
+    "Cartão de Crédito",
+    "Dinheiro",
+    "Visa",
+    "Mastercard"
+  ],
+
+  "endereco": "Av. das Estrelas, 987 - Bairro Luz, São Paulo - SP",
+  "telefone": "(11) 3456-7890",
+  "whatsapp": "(11) 91234-5678",
+
   "horarios": [
     { "dia": "Seg a Sex", "horas": "09h - 20h" },
     { "dia": "Sábado", "horas": "08h - 18h" },
-    "Domingo: Fechado"
-  ]
+    { "dia": "Domingo", "horas": "Fechado" }
+  ],
+
+  "servicos": [
+      { "nome": "Corte Masculino", "preco": 35, "duracao": 30 },
+      { "nome": "Corte + Barba", "preco": 50, "duracao": 45 },
+      { "nome": "Sobrancelha", "preco": 15, "duracao": 10 },
+      { "nome": "Pigmentação de Barba", "preco": 40, "duracao": 20 }
+    ],
+    
+"profissionais": [
+    {
+      "id": "prof01",
+      "nome": "João Silva",
+      "foto": "joao.png",
+      "servicos": ["Corte Masculino", "Corte + Barba"]
+    },
+    {
+      "id": "prof02",
+      "nome": "Carlos Souza",
+      "foto": "carlos.png",
+      "servicos": ["Corte Masculino", "Sobrancelha"]
+    },
+    {
+      "id": "prof03",
+      "nome": "Mateus Oliveira",
+      "foto": "mateus.png",
+      "servicos": ["Pigmentação de Barba", "Corte + Barba"]
+    }
+  ],
+  "btn_agendamento": {
+    "texto": "Começar Agendamento",
+    "link": "tela1.html"
+  },
+
+  "footer": {
+    "col1": {
+      "titulo": "Institucional",
+      "links": ["Quem somos", "Política de privacidade"]
+    },
+    "col2": {
+      "titulo": "Serviços",
+      "links": ["Cortes Cabelo", "Depilação", "Pacotes"]
+    },
+    "col3": {
+      "titulo": "Contato",
+      "links": ["Fale conosco", "Suporte via WhatsApp"]
+    },
+    "copy": "© 2025 Barbearia Estilo Fino - Todos os direitos reservados."
+  }
 }

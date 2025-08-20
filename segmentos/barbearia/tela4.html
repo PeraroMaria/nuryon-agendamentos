@@ -1,132 +1,247 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Escolha o Profissional - Nuryon</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Escolha seu Horário</title>
+  <link rel="stylesheet" href="../css/estilo.css" />
+<script>
+  const empresa = JSON.parse(localStorage.getItem("empresa")) || {};
+  const tema = empresa.tema || "#85d1c1";
+  const estilo = document.createElement("style");
+  estilo.innerHTML = `:root { --cor-tema: ${tema}; }`;
+  document.head.appendChild(estilo);
+</script>
+
+
   <style>
+
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: #f7f9fc;
-      color: #0c1f4a;
+      background: linear-gradient(to bottom, #101010, #1a1a1a);
+      color: #fff;
+      margin: 0;
+      padding: 1rem;
     }
-    .professional-card {
-      border-radius: 12px;
-      background-color: white;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+    h1 {
       text-align: center;
-      padding: 20px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      cursor: pointer;
-      height: 100%;
+      color: var(--cor-tema);
+    }
+
+    .subtitulo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .datas-container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      gap: 10px;
     }
-    .professional-card:hover {
-      transform: translateY(-5px);
-      background-color: #e8f0ff;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
-    }
-    .professional-card img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin-bottom: 10px;
-    }
-    .professional-name {
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-    .professional-desc {
-      font-size: 0.9rem;
-      color: #555;
-    }
-    .btn-next {
-      background-color: #0c1f4a;
-      color: white;
-      font-weight: 600;
-      padding: 12px 24px;
+
+    .dia {
+      min-width: 80px;
+      padding: 10px;
+      background-color: #1f1f1f;
+      border: 2px solid var(--cor-tema);
       border-radius: 8px;
-      border: none;
+      text-align: center;
+      cursor: pointer;
+      flex-shrink: 0;
     }
-    .btn-next:hover {
-      background-color: #0a193a;
+
+    .dia.selecionado {
+      background-color: var(--cor-tema);
+      color: #000;
+    }
+
+    .turno {
+      margin-top: 1rem;
+    }
+
+    .turno h2 {
+      color: var(--cor-tema);
+      margin-bottom: 0.5rem;
+    }
+
+    .horarios {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hora {
+      padding: 10px 15px;
+      border: 2px solid var(--cor-tema);
+      border-radius: 5px;
+      cursor: pointer;
+      color: var(--cor-tema);
+      background-color: transparent;
+    }
+
+    .hora.indisponivel {
+      border-color: #666;
+      color: #666;
+      cursor: not-allowed;
+    }
+
+    .hora.selecionado {
+      background-color: var(--cor-tema);
+      color: #000;
+    }
+
+    .botao-confirmar {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: 2px solid var(--cor-tema);
+      color: var(--cor-tema);
+      border-radius: 30px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="container py-5">
-    <div class="text-center mb-4">
-      <h2 class="fw-bold" id="tituloPagina">Escolha o profissional</h2>
-      <p class="text-muted">Selecione o profissional desejado para o atendimento</p>
-    </div>
+  <h1>Escolha o seu horário</h1>
+  <p class="subtitulo">Selecione a data e o horário desejado para o atendimento</p>
 
-    <div class="row g-4" id="profissionaisContainer">
-      <!-- Profissionais serão inseridos dinamicamente -->
-    </div>
+  <div class="datas-container" id="datas"></div>
 
-    <div class="text-center mt-5">
-      <button class="btn-next" disabled id="nextButton" onclick="window.location.href='tela5.html'">Avançar</button>
-    </div>
+  <div class="turno" id="manha">
+    <h2>Manhã</h2>
+    <div class="horarios" id="horarios-manha"></div>
+  </div>
+  <div class="turno" id="tarde">
+    <h2>Tarde</h2>
+    <div class="horarios" id="horarios-tarde"></div>
+  </div>
+  <div class="turno" id="noite">
+    <h2>Noite</h2>
+    <div class="horarios" id="horarios-noite"></div>
   </div>
 
+  <button class="botao-confirmar">Confirmar Agendamento</button>
+
   <script>
-    const empresaSlug = new URLSearchParams(window.location.search).get('empresa');
+    const datasContainer = document.getElementById("datas");
+    const horariosManha = document.getElementById("horarios-manha");
+    const horariosTarde = document.getElementById("horarios-tarde");
+    const horariosNoite = document.getElementById("horarios-noite");
+    let dataSelecionada = null;
 
-    const dados = JSON.parse(localStorage.getItem('jsonEmpresa'));
-    const servicoSelecionado = localStorage.getItem('servicoSelecionado');
-    document.getElementById('tituloPagina').innerText = `Profissionais para ${servicoSelecionado}`;
+    function gerarDatasProximosDias() {
+      const hoje = new Date();
+      for (let i = 0; i < 14; i++) {
+        const data = new Date();
+        data.setDate(hoje.getDate() + i);
 
-    const container = document.getElementById('profissionaisContainer');
+        const dia = document.createElement("div");
+        dia.classList.add("dia");
+        dia.innerHTML = `
+          <div>${data.toLocaleDateString('pt-BR', { weekday: 'short' }).toUpperCase()}</div>
+          <div>${String(data.getDate()).padStart(2, '0')}/${String(data.getMonth()+1).padStart(2, '0')}</div>
+        `;
+        dia.addEventListener("click", () => {
+          document.querySelectorAll(".dia").forEach(d => d.classList.remove("selecionado"));
+          dia.classList.add("selecionado");
+          dataSelecionada = new Date(data);
+          renderizarHorarios(dataSelecionada);
+        });
 
-    const profissionais = dados.profissionais.filter(p => p.servicos.includes(servicoSelecionado));
+        if (i === 0) {
+          dia.classList.add("selecionado");
+          dataSelecionada = new Date(data);
+        }
 
-    profissionais.forEach(p => {
-      const col = document.createElement('div');
-      col.className = 'col-md-4 d-flex';
-
-      const card = document.createElement('div');
-      card.className = 'professional-card w-100';
-      card.innerHTML = `
-        <img src="img/${p.foto}" alt="${p.nome}">
-        <div class="professional-name">${p.nome}</div>
-        <div class="professional-desc">Especialista</div>
-      `;
-      card.onclick = () => selecionar(card, p.nome);
-
-      col.appendChild(card);
-      container.appendChild(col);
-    });
-
-    // Adiciona "Não tenho preferência"
-    const col = document.createElement('div');
-    col.className = 'col-md-4 d-flex';
-    const card = document.createElement('div');
-    card.className = 'professional-card w-100';
-    card.innerHTML = `
-      <img src="img/sem-preferencia.png" alt="Sem preferência">
-      <div class="professional-name">Não tenho preferência</div>
-      <div class="professional-desc">Qualquer profissional disponível</div>
-    `;
-    card.onclick = () => selecionar(card, 'Sem preferência');
-    col.appendChild(card);
-    container.appendChild(col);
-
-    function selecionar(el, nomeProfissional) {
-      document.querySelectorAll('.professional-card').forEach(card => {
-        card.style.border = 'none';
-        card.style.fontWeight = 'normal';
-      });
-      el.style.border = '2px solid #0c1f4a';
-      el.style.fontWeight = '600';
-      document.getElementById('nextButton').disabled = false;
-      localStorage.setItem('profissionalSelecionado', nomeProfissional);
+        datasContainer.appendChild(dia);
+      }
     }
+
+    function renderizarHorarios(data) {
+      const horarios = {
+        manha: ["09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45"],
+        tarde: ["12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45"],
+        noite: ["18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45"]
+      };
+
+      [horariosManha, horariosTarde, horariosNoite].forEach(div => div.innerHTML = "");
+
+      const agora = new Date();
+
+      for (const [turno, lista] of Object.entries(horarios)) {
+        const container = document.getElementById(`horarios-${turno}`);
+        lista.forEach(hora => {
+          const [h, m] = hora.split(":").map(Number);
+          const dataHora = new Date(data.getFullYear(), data.getMonth(), data.getDate(), h, m);
+          const btn = document.createElement("div");
+          btn.classList.add("hora");
+          btn.textContent = hora;
+
+          if (dataHora < agora) {
+            btn.classList.add("indisponivel");
+          } else {
+            btn.addEventListener("click", () => {
+              document.querySelectorAll(".hora").forEach(b => b.classList.remove("selecionado"));
+              btn.classList.add("selecionado");
+            });
+          }
+
+          container.appendChild(btn);
+        });
+      }
+    }
+
+    gerarDatasProximosDias();
+    renderizarHorarios(new Date());
+    document.querySelector('.botao-confirmar').addEventListener('click', () => {
+  
+const nome = localStorage.getItem("clienteNome");
+const email = localStorage.getItem("clienteEmail");
+const telefone = localStorage.getItem("clienteTelefone");
+
+let servico, profissional;
+
+try {
+  servico = JSON.parse(localStorage.getItem("servicoSelecionado"));
+} catch (e) {
+  console.error("Erro ao ler servicoSelecionado:", e);
+}
+
+profissional = localStorage.getItem("profissionalSelecionado");
+
+
+  const horarioSelecionado = document.querySelector(".hora.selecionado");
+  const diaSelecionado = document.querySelector(".dia.selecionado");
+
+  if (!nome || !email || !telefone || !servico || !profissional || !horarioSelecionado || !diaSelecionado) {
+    alert("Por favor, preencha todas as etapas do agendamento.");
+    return;
+  }
+
+  const dataTexto = diaSelecionado.innerText.split('\n')[1]; // formato: 22/07
+  const resumo = {
+    nome,
+    email,
+    telefone,
+    servico: servico.nome,
+    profissional: profissional,
+
+    data: dataTexto,
+    hora: horarioSelecionado.textContent
+  };
+
+  localStorage.setItem("resumoAgendamento", JSON.stringify(resumo));
+  console.log("Redirecionando para tela5.html");
+  const empresaSlug = new URLSearchParams(window.location.search).get("empresa");
+  window.location.href = `tela5.html?empresa=${empresaSlug}`;
+
+});
+
   </script>
 </body>
 </html>

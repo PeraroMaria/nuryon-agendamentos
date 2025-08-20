@@ -1,0 +1,31 @@
+{
+  "nome": "Cigana",
+  "descricao": "Atendimentos exclusivos com foco em bem-estar e estética espiritual.",
+  "cor_principal": "#8B0000",
+  "logo": "cigana.png",
+  "imagem_estabelecimento": "estabelecimento_cigana.png",
+  "facilidades": ["Estacionamento", "Wi-Fi", "Ambiente climatizado"],
+  "pagamentos": ["Cartão de crédito", "Pix", "Dinheiro"],
+  "telefone": "11999999999",
+  "whatsapp": "5511999999999",
+  "endereco": "Rua das Estrelas, 123 - São Paulo/SP",
+  "horarios": [
+    "Seg a Sex: 9h às 18h",
+    "Sábado: 9h às 14h"
+  ],
+  "footer": {
+    "col1": {
+      "titulo": "Serviços",
+      "links": ["Limpeza de Pele", "Drenagem", "Massagem Relaxante"]
+    },
+    "col2": {
+      "titulo": "Sobre",
+      "links": ["Nossa História", "Equipe", "Missão e Valores"]
+    },
+    "col3": {
+      "titulo": "Contato",
+      "links": ["WhatsApp", "Instagram", "Facebook"]
+    },
+    "copy": "© 2025 Cigana - Todos os direitos reservados"
+  }
+}

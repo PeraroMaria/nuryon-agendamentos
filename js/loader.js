@@ -12,7 +12,7 @@
   }
 
   // 2. Busca os dados da empresa via JSON
-  fetch(`/empresas/${empresaId}.json`)
+  fetch(`../../empresas/${empresaId}.json`)
     .then(response => {
       if (!response.ok) throw new Error("Empresa não encontrada.");
       return response.json();
@@ -31,12 +31,12 @@
     }
 
     // Cabeçalho
-    document.getElementById("logoEmpresa").src = `../../img/${dados.logo}`;
+    document.getElementById("logoEmpresa").src = `../../imagens/${empresaId}/${dados.logo}`;
     document.getElementById("nomeEmpresa").innerText = dados.nome || "Sem nome";
     document.getElementById("descricaoEmpresa").innerText = dados.descricao || "";
 
     // Imagem principal
-    document.getElementById("imgEstabelecimento").src = `../../img/${dados.imagem}`;
+    document.getElementById("imgEstabelecimento").src = `../../imagens/${empresaId}/${dados.imagem}`;
 
     // Facilidades
     const facilidades = dados.facilidades || [];
@@ -99,11 +99,15 @@
     }
 
     // Salva o JSON completo no localStorage para uso nas próximas telas
-    localStorage.setItem("jsonEmpresa", JSON.stringify(dados));
+    localStorage.setItem(empresaId, JSON.stringify(dados));
 
     // Redireciona com o parâmetro da empresa
     const btn = document.getElementById("btnAgendar");
-    if (btn) btn.href = `tela1.html?empresa=${empresaId}`;
+    if (btn) {
+      btn.href = `${dados.btn_agendamento?.link || "tela1.html"}?empresa=${empresaId}`;
+      btn.innerText = dados.btn_agendamento?.texto || "Agendar";
+    }
+
   }
 
   // 4. Função auxiliar para formatar o número do WhatsApp
